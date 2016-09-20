@@ -70,5 +70,4 @@ public class Controller {
         s11.setFill(Color.FORESTGREEN);
 
     }
-
 }
