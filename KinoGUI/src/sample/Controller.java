@@ -7,17 +7,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-<<<<<<< HEAD
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-=======
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
->>>>>>> 53c5bcd4c9a036e25cb936c1feb54517255adcc6
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -96,8 +93,7 @@ public class Controller {
         mainStage.setScene(cinemaScene);
     }
 
-<<<<<<< HEAD
-=======
+
     public void administrationButtonClicked() throws  IOException {
         Parent administrationParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
         Scene administrationScene = new Scene(administrationParent);
@@ -131,11 +127,6 @@ public class Controller {
         }
     }
 
-
-
-    @FXML private String s11;
->>>>>>> 53c5bcd4c9a036e25cb936c1feb54517255adcc6
-
     public void seatClicked(MouseEvent e) {
         infoLabelCinema.setText("");
         Rectangle rect = (Rectangle)e.getSource();
@@ -164,10 +155,4 @@ public class Controller {
         ticketCount.setText(""+tC);
         totalPrice.setText(""+tC*85+" Kroner");
     }
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> 53c5bcd4c9a036e25cb936c1feb54517255adcc6
 }
