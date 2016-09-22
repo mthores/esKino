@@ -13,7 +13,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         Controller.initializeController(primaryStage);
         primaryStage.setTitle("EsKino");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 1280, 800));
         primaryStage.show();
     }
 
