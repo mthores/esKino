@@ -2,36 +2,39 @@ package sample;
 
 
 import javafx.animation.PauseTransition;
-import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
 
 public class addMovie {
 
     //This scenes controls the addMovie scene
 
-    @FXML private Button addButton;
+
     @FXML private Label savedLabel;
-
-
-
-
+    @FXML public TextField titelText;
+    @FXML public TextField durationText;
+    @FXML public TextField ticketPriceText;
+    @FXML public TextField lincensPriceText;
+    @FXML public TextArea descriptionArea;
+    @FXML public ImageView picturePreview;
+    @FXML public ComboBox genreCombo;
+    @FXML public ComboBox ratingCombo;
 
 
 
     public void addMovie(){
         //call the DB
 
-        //sets the label to 
+        //sets the label to
         savedLabel.setText("Movie saved!");
 
         //clear the savedLabel to nothing!
@@ -39,9 +42,20 @@ public class addMovie {
         delayforclear.setOnFinished(e-> savedLabel.setText(""));
         delayforclear.play();
 
-
-
+        //clear the fields
+        clearFields();
     }
 
+
+    public void clearFields(){
+        titelText.clear();
+        durationText.clear();
+        ticketPriceText.clear();
+        lincensPriceText.clear();
+        descriptionArea.clear();
+        //picturePreview - ??
+        genreCombo.setValue("Genre");
+        ratingCombo.setValue("Rating");
+    }
 
 }
