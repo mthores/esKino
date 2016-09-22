@@ -1,14 +1,21 @@
 package sample;
 
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.w3c.dom.css.Rect;
 
 import java.io.IOException;
 
@@ -17,6 +24,24 @@ public class Controller {
     private static Stage mainStage;
     @FXML private TextField username;
     @FXML private PasswordField password;
+
+    @FXML private Label infoLabelCinema;
+    @FXML private Label ticketCount;
+    @FXML private Label totalPrice;
+    private int tC;
+
+    @FXML private Rectangle s11;
+    @FXML private Rectangle s12;
+    @FXML private Rectangle s13;
+    @FXML private Rectangle s14;
+    @FXML private Rectangle s15;
+    @FXML private Rectangle s16;
+    @FXML private Rectangle s17;
+    @FXML private Rectangle s18;
+    @FXML private Rectangle s19;
+    @FXML private Rectangle s110;
+    @FXML private Rectangle s111;
+    @FXML private Rectangle s112;
 
     public static void initializeController(Stage stage){
         mainStage = stage;
@@ -63,12 +88,36 @@ public class Controller {
         mainStage.setScene(cinemaScene);
     }
 
-    @FXML private String s11;
 
-    public void chooseSeat(Rectangle s11) {
+    public void seatClicked(MouseEvent e) {
+        infoLabelCinema.setText("");
+        Rectangle rect = (Rectangle)e.getSource();
+        Paint rectColor = rect.getFill();
+        String name = rect.getId();
 
-        s11.setFill(Color.FORESTGREEN);
+        if(rectColor == Color.LIMEGREEN){
+            rect.setFill(Color.DODGERBLUE);
+            tC++;
+        }
+
+        if(rectColor == Color.RED){
+            infoLabelCinema.setText("Sædet er optaget.");
+        }
+
+        if(rectColor == Color.DODGERBLUE){
+            rect.setFill(Color.LIMEGREEN);
+            tC--;
+        }
+
+        updateTicketCounters();
 
     }
+
+    public void updateTicketCounters(){
+        ticketCount.setText(""+tC);
+        totalPrice.setText(""+tC*85+" Kroner");
+    }
+
+
 
 }
