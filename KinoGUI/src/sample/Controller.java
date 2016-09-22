@@ -7,10 +7,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+<<<<<<< HEAD
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+=======
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+>>>>>>> 53c5bcd4c9a036e25cb936c1feb54517255adcc6
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -21,6 +28,7 @@ import java.io.IOException;
 
 public class Controller {
 
+    private static MouseEvent e;
     private static Stage mainStage;
     @FXML private TextField username;
     @FXML private PasswordField password;
@@ -88,6 +96,45 @@ public class Controller {
         mainStage.setScene(cinemaScene);
     }
 
+<<<<<<< HEAD
+=======
+    public void administrationButtonClicked() throws  IOException {
+        Parent administrationParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
+        Scene administrationScene = new Scene(administrationParent);
+        mainStage.setScene(administrationScene);
+    }
+
+    public void addMovieButtonClicked() throws IOException {
+        Parent addMovieParent = FXMLLoader.load(getClass().getResource("addMovie.fxml"));
+        Scene addMovieScene = new Scene(addMovieParent);
+        mainStage.setScene(addMovieScene);
+    }
+
+    public void editMovieButtonClicked() throws IOException {
+        //if (e.getSource() != null) {
+            Parent editMovieParent = FXMLLoader.load(getClass().getResource("EditMovie.fxml"));
+            Scene editMovieScene = new Scene(editMovieParent);
+            mainStage.setScene(editMovieScene);
+        //}
+    }
+
+    public Object mouseClickedMovie(MouseEvent e) {
+
+        if (e.getSource() != null) {
+            TableRow<Object> row = (TableRow<Object>) e.getSource();
+
+            Object rowData = row.getItem();
+
+            return rowData;
+        } else {
+            return null;
+        }
+    }
+
+
+
+    @FXML private String s11;
+>>>>>>> 53c5bcd4c9a036e25cb936c1feb54517255adcc6
 
     public void seatClicked(MouseEvent e) {
         infoLabelCinema.setText("");
@@ -117,7 +164,10 @@ public class Controller {
         ticketCount.setText(""+tC);
         totalPrice.setText(""+tC*85+" Kroner");
     }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 53c5bcd4c9a036e25cb936c1feb54517255adcc6
 }

@@ -15,10 +15,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("addMovie.fxml"));
         Controller.initializeController(primaryStage);
         primaryStage.setTitle("EsKino");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 1280, 800));
         primaryStage.show();
     }
 
