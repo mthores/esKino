@@ -21,7 +21,7 @@ public class ShowManagement implements Initializable{
 
     }
 
-    public void  selectedCheckbox(ActionEvent e){
+    public String selectedCheckbox(ActionEvent e){
 
         int count=0;
         String choices="";
@@ -33,7 +33,9 @@ public class ShowManagement implements Initializable{
             count++;
             choices+=hallCheckbox2.getText() + "\n";
         }
+        System.out.println(choices);
 
+        return choices;
 
     }
 
