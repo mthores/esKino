@@ -14,21 +14,16 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableRow;
-<<<<<<< HEAD
+
 import javafx.scene.control.TableView;
-=======
->>>>>>> ef2d8ea110e3b0168ccb99eed5ee3915cbb338b3
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-<<<<<<< HEAD
 import java.io.*;
-=======
-import org.w3c.dom.css.Rect;
->>>>>>> ef2d8ea110e3b0168ccb99eed5ee3915cbb338b3
+
 
 //import java.io.IOException;
 
@@ -102,27 +97,26 @@ public class Controller {
         mainStage.setScene(cinemaScene);
     }
 
-<<<<<<< HEAD
-    @FXML TableView tW;
-
-    /*tW2.setRowFactory( tv -> {
-        TableRow<Object> row = new TableRow<>();
-        row.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                MyType rowData = row.getItem();
-                System.out.println(rowData);
-            }
-        });
-        return row ;
-    });*/
-    @FXML private String s11;
-=======
->>>>>>> ef2d8ea110e3b0168ccb99eed5ee3915cbb338b3
+    @FXML TableView <Object> tW2 = new TableView<>();
 
     public void administrationButtonClicked() throws  IOException {
         Parent administrationParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
         Scene administrationScene = new Scene(administrationParent);
+
+        tW2.setRowFactory(tW2 -> {
+            TableRow<Object> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    Object rowData = row.getItem();
+                    System.out.println(rowData);
+                }
+            });
+            return row ;
+        });
+
+
         mainStage.setScene(administrationScene);
+
     }
 
     public void addMovieButtonClicked() throws IOException {
@@ -139,61 +133,29 @@ public class Controller {
         //}
     }
 
-    public Object mouseClickedMovie(MouseEvent e) {
 
-        if (e.getSource() != null) {
-            TableRow<Object> row = (TableRow<Object>) e.getSource();
+    public void seatClicked(MouseEvent e){
+            infoLabelCinema.setText("");
+            Rectangle rect = (Rectangle) e.getSource();
+            Paint rectColor = rect.getFill();
+            String name = rect.getId();
 
-            Object rowData = row.getItem();
+            if (rectColor == Color.LIMEGREEN) {
+                rect.setFill(Color.DODGERBLUE);
+                tC++;
+            }
 
-            return rowData;
-        } else {
-            return null;
+            if (rectColor == Color.RED) {
+                infoLabelCinema.setText("Sædet er optaget.");
+            }
+
+            if (rectColor == Color.DODGERBLUE) {
+                rect.setFill(Color.LIMEGREEN);
+                tC--;
+            }
+
+            updateTicketCounters();
         }
-        tableView.setRowFactory( tv -> {
-            TableRow<Object> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-
-                    //user that has been clicked on
-                    Object rowData = row.getItem();
-
-                    //show profile
-                    try {
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            return row;
-        });
-    }
-
-    public void seatClicked(MouseEvent e) {
-        infoLabelCinema.setText("");
-        Rectangle rect = (Rectangle)e.getSource();
-        Paint rectColor = rect.getFill();
-        String name = rect.getId();
-
-        if(rectColor == Color.LIMEGREEN){
-            rect.setFill(Color.DODGERBLUE);
-            tC++;
-        }
-
-        if(rectColor == Color.RED){
-            infoLabelCinema.setText("Sædet er optaget.");
-        }
-
-        if(rectColor == Color.DODGERBLUE){
-            rect.setFill(Color.LIMEGREEN);
-            tC--;
-        }
-
-        updateTicketCounters();
-
-    }
 
     public void updateTicketCounters(){
         ticketCount.setText(""+tC);

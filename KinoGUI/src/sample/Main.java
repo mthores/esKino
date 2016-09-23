@@ -7,12 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-<<<<<<< HEAD
 import javafx.scene.control.TableView;
-=======
 import javafx.scene.control.Control;
 import javafx.scene.shape.Rectangle;
->>>>>>> ef2d8ea110e3b0168ccb99eed5ee3915cbb338b3
 import javafx.stage.Stage;
 
 public class Main extends Application {
