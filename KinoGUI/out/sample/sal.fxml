@@ -7,20 +7,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<SplitPane dividerPositions="0.32608695652173914" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
             <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Antal billetter:" />
             <Text layoutX="14.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pris:" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="14.0" layoutX="18.0" layoutY="370.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0dbc24" height="14.0" layoutX="18.0" layoutY="349.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="18.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="18.0" layoutY="349.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" layoutX="18.0" layoutY="328.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
             <Text layoutX="43.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ledig" />
-            <Text layoutX="43.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valgte" />
+            <Text layoutX="43.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valgt(e)" />
             <Text layoutX="43.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Optaget" />
-            <Label layoutX="113.0" layoutY="23.0" text="Label" />
-            <Label layoutX="113.0" layoutY="40.0" text="Label" />
+            <Label fx:id="ticketCount" layoutX="113.0" layoutY="23.0" text="0" />
+            <Label fx:id="totalPrice" layoutX="113.0" layoutY="40.0" text="0" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="444.0" prefWidth="416.0">
          <children>
@@ -28,37 +28,18 @@
                <children>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                     </children>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </HBox>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
-                     <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s11" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s12" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s13" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s14" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s15" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s16" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s17" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s18" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s19" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s110" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s111" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s112" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -70,6 +51,7 @@
             <Button layoutX="302.0" layoutY="365.0" mnemonicParsing="false" text="Reservér" />
             <Label layoutX="170.0" layoutY="40.0" text="Lærred Sal 1" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757474" height="17.0" layoutX="57.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" width="305.0" />
+            <Label fx:id="infoLabelCinema" layoutX="191.0" layoutY="370.0" prefHeight="17.0" prefWidth="0.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>

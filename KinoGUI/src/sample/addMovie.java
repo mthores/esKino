@@ -31,10 +31,10 @@ public class addMovie {
 
 
 
-    public void addMovie(){
+    public void addMovieAction(){
         //call the DB
 
-        //sets the label to
+        //sets the label to "Saved"
         savedLabel.setText("Movie saved!");
 
         //clear the savedLabel to nothing!

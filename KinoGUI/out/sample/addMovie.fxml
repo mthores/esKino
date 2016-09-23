@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<<<<<<< HEAD
-=======
 <?import javafx.collections.*?>
->>>>>>> d5d23038d378e7a6f4fdece9349e3b8b61174c9a
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
@@ -14,44 +11,26 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
-<<<<<<< HEAD
-
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.addMovie">
-   <children>
-      <Button fx:id="okButton" layoutX="1164.0" layoutY="729.0" mnemonicParsing="false" text="Ok" />
-      <Button fx:id="addMovieButton" layoutX="1079.0" layoutY="729.0" mnemonicParsing="false" text="Add Movie" />
-      <Button fx:id="cancelButtion" layoutX="56.0" layoutY="729.0" mnemonicParsing="false" text="Cancel" />
-=======
 <?import javafx.collections.FXCollections?>
 
 <AnchorPane fx:id="acchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.addMovie">
    <children>
-      <Button fx:id="addMovieButton" layoutX="1079.0" layoutY="729.0" mnemonicParsing="false" onAction="#addMovie" text="Add Movie" />
+      <Button fx:id="addMovieButton" layoutX="1079.0" layoutY="729.0" mnemonicParsing="false" onAction="#addMovieAction" text="Add Movie" />
       <Button fx:id="backButtion" layoutX="56.0" layoutY="729.0" mnemonicParsing="false" text="Back" />
->>>>>>> d5d23038d378e7a6f4fdece9349e3b8b61174c9a
       <Label fx:id="MainTitelLabel" layoutX="493.0" layoutY="38.0" text="Add Movie">
          <font>
             <Font size="61.0" />
          </font>
       </Label>
-<<<<<<< HEAD
-      <Label fx:id="savedLabel" layoutX="1100.0" layoutY="712.0" />
-=======
       <Label fx:id="savedLabel" layoutX="522.0" layoutY="628.0" textFill="#13da31">
          <font>
             <Font size="34.0" />
          </font></Label>
->>>>>>> d5d23038d378e7a6f4fdece9349e3b8b61174c9a
       <TextField fx:id="titelText" layoutX="130.0" layoutY="210.0" promptText="Titel" />
       <TextField fx:id="durationText" layoutX="130.0" layoutY="250.0" promptText="Duration" />
       <TextField fx:id="ticketPriceText" layoutX="130.0" layoutY="290.0" promptText="Ticket Price" />
       <TextField fx:id="lincensPriceText" layoutX="130.0" layoutY="330.0" promptText="Licens Price" />
       <TextArea fx:id="descriptionArea" layoutX="409.0" layoutY="210.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="193.0" prefWidth="356.0" promptText="Description of the Movie" />
-<<<<<<< HEAD
-      <ComboBox fx:id="genreCombo" layoutX="130.0" layoutY="370.0" promptText="Genre" />
-      <ComboBox fx:id="ratingCombo" layoutX="130.0" layoutY="410.0" promptText="Rating" />
-=======
       <ComboBox fx:id="genreCombo" layoutX="130.0" layoutY="371.0" promptText="Genre">
          <items>
                  <FXCollections fx:factory="observableArrayList">
@@ -80,7 +59,6 @@
          </FXCollections>
       </items>
    </ComboBox>
->>>>>>> d5d23038d378e7a6f4fdece9349e3b8b61174c9a
       <ImageView fx:id="picturePreview" fitHeight="276.0" fitWidth="188.0" layoutX="919.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../billede.png" />
