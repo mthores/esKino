@@ -15,9 +15,14 @@
 
 <AnchorPane fx:id="acchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.addMovie">
    <children>
+<<<<<<< HEAD
       <Button fx:id="okButton" layoutX="1164.0" layoutY="729.0" mnemonicParsing="false" text="Ok" />
       <Button fx:id="addMovieButton" layoutX="1079.0" layoutY="729.0" mnemonicParsing="false" onAction="#addMovie" text="Add Movie" />
       <Button fx:id="cancelButtion" layoutX="56.0" layoutY="729.0" mnemonicParsing="false" text="Cancel" />
+=======
+      <Button fx:id="addMovieButton" layoutX="1079.0" layoutY="729.0" mnemonicParsing="false" onAction="#addMovie" text="Add Movie" />
+      <Button fx:id="backButtion" layoutX="56.0" layoutY="729.0" mnemonicParsing="false" text="Back" />
+>>>>>>> ef2d8ea110e3b0168ccb99eed5ee3915cbb338b3
       <Label fx:id="MainTitelLabel" layoutX="493.0" layoutY="38.0" text="Add Movie">
          <font>
             <Font size="61.0" />
