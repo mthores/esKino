@@ -125,6 +125,25 @@ public class Controller {
         } else {
             return null;
         }
+        tableView.setRowFactory( tv -> {
+            TableRow<Object> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+
+                    //user that has been clicked on
+                    Object rowData = row.getItem();
+
+                    //show profile
+                    try {
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            return row;
+        });
     }
 
     public void seatClicked(MouseEvent e) {
