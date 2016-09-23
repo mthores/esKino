@@ -10,7 +10,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.collections.FXCollections?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ShowManagement">
    <children>
       <Button fx:id="showRemoveButton" layoutX="1062.0" layoutY="695.0" mnemonicParsing="false" text="Remove selected show" />
       <Button fx:id="showMbackButton" layoutX="77.0" layoutY="695.0" mnemonicParsing="false" text="Back" />
@@ -51,15 +51,5 @@
          </columnResizePolicy>
       </TableView>
       <Button fx:id="savedshowButton" layoutX="279.0" layoutY="478.0" mnemonicParsing="false" text="Save show" />
-      <Label fx:id="showLabel" layoutX="491.0" layoutY="323.0" text="Label">
-         <font>
-            <Font size="51.0" />
-         </font>
-      </Label>
-      <Label fx:id="showLabel2" layoutX="497.0" layoutY="429.0" text="Label">
-         <font>
-            <Font size="51.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

@@ -15,8 +15,6 @@ public class ShowManagement implements Initializable{
 
     @FXML private CheckBox hallCheckbox1;
     @FXML private CheckBox hallCheckbox2;
-    @FXML private Label showLabel;
-    @FXML private Label showLabel2;
 
     public void selectedMovieFromDB(){
 
@@ -36,8 +34,6 @@ public class ShowManagement implements Initializable{
             choices+=hallCheckbox2.getText() + "\n";
         }
 
-        showLabel.setText("Sports chosen: " + count);
-        showLabel2.setText(choices);
 
     }
 
