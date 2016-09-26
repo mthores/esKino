@@ -20,7 +20,7 @@ import java.io.*;
 
 //import java.io.IOException;
 
-public class Controller {
+public class LoginSalMainmenuController {
 
     private static MouseEvent e;
     private static Stage mainStage;
