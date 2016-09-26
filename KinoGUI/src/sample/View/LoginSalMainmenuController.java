@@ -20,7 +20,7 @@ import java.io.*;
 
 //import java.io.IOException;
 
-public class Controller {
+public class LoginSalMainmenuController {
 
     private static MouseEvent e;
     private static Stage mainStage;
@@ -113,7 +113,7 @@ public class Controller {
     }
 
     public void addMovieButtonClicked() throws IOException {
-        Parent addMovieParent = FXMLLoader.load(getClass().getResource("View/addMovie.fxml"));
+        Parent addMovieParent = FXMLLoader.load(getClass().getResource("View/AddMovieController.fxml"));
         Scene addMovieScene = new Scene(addMovieParent);
         mainStage.setScene(addMovieScene);
     }
