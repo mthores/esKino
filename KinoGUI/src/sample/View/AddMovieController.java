@@ -16,7 +16,7 @@ import javafx.util.Duration;
 
 public class AddMovieController {
 
-    //This scenes controls the addMovie scene
+    //This scenes controls the AddMovieController scene
 
 
     @FXML private Label savedLabel;

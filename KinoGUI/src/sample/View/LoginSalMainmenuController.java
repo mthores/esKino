@@ -113,7 +113,7 @@ public class LoginSalMainmenuController {
     }
 
     public void addMovieButtonClicked() throws IOException {
-        Parent addMovieParent = FXMLLoader.load(getClass().getResource("View/addMovie.fxml"));
+        Parent addMovieParent = FXMLLoader.load(getClass().getResource("View/AddMovieController.fxml"));
         Scene addMovieScene = new Scene(addMovieParent);
         mainStage.setScene(addMovieScene);
     }
