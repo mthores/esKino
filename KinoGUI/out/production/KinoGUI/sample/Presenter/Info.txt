@@ -1,0 +1,6 @@
+Skal indeholde alle kode som får programmet til at fungere
+(skal tænkes lidt om en controller)
+
+f.eks. 
+Skrive til DB metode 
+Hente fra DB metode 

@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.Controller">
    <left>
       <Region BorderPane.alignment="CENTER" />
    </left>
@@ -27,15 +27,10 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Log ind for at fortsætte:" />
             <HBox alignment="CENTER">
                <children>
-                  <VBox fx:id="loginBox" alignment="CENTER" spacing="8.0">
+                  <VBox alignment="CENTER" spacing="8.0">
                      <children>
-<<<<<<< HEAD
-                        <TextField fx:id="username" promptText="Username" focusTraversable="false" canReceiveFocus="true"/>
-                        <PasswordField fx:id="password" promptText="Password" focusTraversable="false" canReceiveFocus="true"/>
-=======
                         <TextField fx:id="username" promptText="Username" focusTraversable="true"  />
                         <PasswordField fx:id="password" promptText="Password" focusTraversable="true" />
->>>>>>> f09194a4da0e8fe1bd670a85891ad1a0cf28e0b5
                      </children>
                      <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
