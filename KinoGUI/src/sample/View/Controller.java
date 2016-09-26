@@ -1,23 +1,16 @@
-package sample;
+package sample.View;
 
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableRow;
 
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -120,7 +113,7 @@ public class Controller {
     }
 
     public void addMovieButtonClicked() throws IOException {
-        Parent addMovieParent = FXMLLoader.load(getClass().getResource("addMovie.fxml"));
+        Parent addMovieParent = FXMLLoader.load(getClass().getResource("View/addMovie.fxml"));
         Scene addMovieScene = new Scene(addMovieParent);
         mainStage.setScene(addMovieScene);
     }
