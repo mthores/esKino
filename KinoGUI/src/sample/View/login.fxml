@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.Controller">
    <left>
       <Region BorderPane.alignment="CENTER" />
    </left>
@@ -26,16 +27,16 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Log ind for at fortsætte:" />
             <HBox alignment="CENTER">
                <children>
-                  <VBox fx:id="loginBox" alignment="CENTER" spacing="8.0">
+                  <VBox alignment="CENTER" spacing="8.0">
                      <children>
-                        <TextField fx:id="username" promptText="Username"/>
-                        <PasswordField fx:id="password" promptText="Password"/>
+                        <TextField fx:id="username" promptText="Username" focusTraversable="true"  />
+                        <PasswordField fx:id="password" promptText="Password" focusTraversable="true" />
                      </children>
                      <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </padding>
                   </VBox>
-                  <Button fx:id="loginButton" alignment="TOP_LEFT" defaultButton="true" mnemonicParsing="false" onAction="#loginButtonClicked" text="Log ind" >
+                  <Button alignment="TOP_LEFT" defaultButton="true" mnemonicParsing="false" onAction="#loginButtonClicked" text="Log ind">
                      <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </padding>

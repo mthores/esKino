@@ -16,7 +16,7 @@
                </font>
             </Text>
             <Button mnemonicParsing="false" onAction="#reservationMenuClicked" text="Reservationer" />
-            <Button layoutX="10.0" layoutY="27.0" mnemonicParsing="false" text="Administration" />
+            <Button layoutX="10.0" layoutY="27.0" mnemonicParsing="false" onAction="#administrationButtonClicked" text="Administration" />
             <Button layoutX="10.0" layoutY="53.0" mnemonicParsing="false" text="Statistik" />
             <Button cancelButton="true" mnemonicParsing="false" onAction="#logOffButtonClicked" text="Log af" />
          </children>
