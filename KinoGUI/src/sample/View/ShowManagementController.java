@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ShowManagement implements Initializable{
+public class ShowManagementController implements Initializable{
 
 
     @FXML private CheckBox hallCheckbox1;
