@@ -26,16 +26,16 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Log ind for at fortsætte:" />
             <HBox alignment="CENTER">
                <children>
-                  <VBox alignment="CENTER" spacing="8.0">
+                  <VBox fx:id="loginBox" alignment="CENTER" spacing="8.0">
                      <children>
-                        <TextField fx:id="username" promptText="Username" focusTraversable="false"  />
-                        <PasswordField fx:id="password" promptText="Password" focusTraversable="false" />
+                        <TextField fx:id="username" promptText="Username"/>
+                        <PasswordField fx:id="password" promptText="Password"/>
                      </children>
                      <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </padding>
                   </VBox>
-                  <Button alignment="TOP_LEFT" defaultButton="true" mnemonicParsing="false" onAction="#loginButtonClicked" text="Log ind">
+                  <Button fx:id="loginButton" alignment="TOP_LEFT" defaultButton="true" mnemonicParsing="false" onAction="#loginButtonClicked" text="Log ind" >
                      <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </padding>

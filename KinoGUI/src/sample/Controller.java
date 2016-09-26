@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -21,6 +22,7 @@ public class Controller {
     public static void initializeController(Stage stage){
         mainStage = stage;
     }
+
 
     public void loginButtonClicked() throws IOException {
 
