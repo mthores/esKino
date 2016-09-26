@@ -13,7 +13,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.collections.FXCollections?>
 
-<AnchorPane fx:id="acchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.addMovie">
+<AnchorPane fx:id="acchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.addMovie">
    <children>
       <Button fx:id="addMovieButton" layoutX="1079.0" layoutY="729.0" mnemonicParsing="false" onAction="#addMovieAction" text="Add Movie" />
       <Button fx:id="backButtion" layoutX="56.0" layoutY="729.0" mnemonicParsing="false" text="Back" />
@@ -61,7 +61,7 @@
    </ComboBox>
       <ImageView fx:id="picturePreview" fitHeight="276.0" fitWidth="188.0" layoutX="919.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../billede.png" />
+            <Image url="@../../billede.png" />
          </image>
          <viewport>
             <Rectangle2D minX="934.0" minY="187.0" width="934.0" />
