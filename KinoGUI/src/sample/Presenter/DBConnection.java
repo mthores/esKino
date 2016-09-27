@@ -13,7 +13,6 @@ public class DBConnection {
         public static Connection getConnection(){
             Connection connection = null;
 
-
             try {
 
                 Class.forName("com.mysql.jdbc.Driver");
