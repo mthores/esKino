@@ -12,14 +12,16 @@ public class Shows {
     private SimpleIntegerProperty cinemaHall;
     private SimpleStringProperty date;
     private SimpleStringProperty time;
+    private SimpleIntegerProperty id;
 
 
     //constructor
-    public Shows(String movieTitel, int cinemaHall, String date, String time) {
+    public Shows(String movieTitel, int cinemaHall, String date, String time, int id) {
         this.movieTitel = new SimpleStringProperty(movieTitel);
         this.cinemaHall = new SimpleIntegerProperty(cinemaHall);
         this.date = new SimpleStringProperty(date);
         this.time = new SimpleStringProperty(time);
+        this.id = new SimpleIntegerProperty(id);
     }
 
     //getter & setter
@@ -70,4 +72,6 @@ public class Shows {
     public void setTime(String time) {
         this.time.set(time);
     }
+
+    public int getID() { return id.get();}
 }
