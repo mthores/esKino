@@ -7,12 +7,7 @@ import sample.View.ShowManagementController;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 
-/**
- * Created by Mikkel on 27/09/2016.
- */
 public class DBController {
 
     //gets movies from db and adds to show management
@@ -39,8 +34,8 @@ public class DBController {
         }
     }
 
-    public void writeToShowsDB(){
 
-    }
+
+
 
 }
