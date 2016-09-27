@@ -1,20 +1,26 @@
 package sample.View;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ShowManagementController implements Initializable{
+public class ShowManagementController{
+
 
 
     @FXML private CheckBox hallCheckbox1;
     @FXML private CheckBox hallCheckbox2;
+
+    @FXML private ComboBox selectMovieCombo;
 
     public void selectedMovieFromDB(){
 
@@ -39,8 +45,17 @@ public class ShowManagementController implements Initializable{
 
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void setDataToCombobox(){
+
+        ObservableList setDataToComboxObservableList = FXCollections.observableArrayList();
+
+        selectMovieCombo.getItems().clear();
+        //ObservableList to combox
+        selectMovieCombo.setItems(setDataToComboxObservableList);
+
 
     }
+
+
+
 }
