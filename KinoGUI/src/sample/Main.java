@@ -21,7 +21,7 @@ public class Main extends Application {
         primaryStage.show();
 
 
-        TableView<Object> tW3 = new TableView<>();
+        //TableView<Object> tW3 = new TableView<>();
     }
 
 

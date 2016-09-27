@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Film {
 
-
+    private SimpleIntegerProperty id;
     private SimpleStringProperty titel;
     private SimpleStringProperty description;
     private SimpleIntegerProperty ticketPrice;
@@ -18,7 +18,8 @@ public class Film {
 
 
     //contructor
-    public Film(String titel, String description, int ticketPrice, String duration, String genre, String rating, int licensPrice, int ticketSold, int hall) {
+    public Film(String titel, String description, int ticketPrice, String duration,
+                String genre, String rating, int licensPrice, int ticketSold, int hall, int id) {
 
         this.titel = new SimpleStringProperty(titel);
         this.description = new SimpleStringProperty(description);
@@ -29,6 +30,7 @@ public class Film {
         this.licensPrice = new SimpleIntegerProperty(licensPrice);
         this.ticketSold = new SimpleIntegerProperty(ticketSold);
         this.hall = new SimpleIntegerProperty(hall);
+        this.id = new SimpleIntegerProperty(id);
     }
 
     //setter & setters
@@ -138,5 +140,9 @@ public class Film {
 
     public void setHall(int hall) {
         this.hall.set(hall);
+    }
+
+    public  int getID() {
+        return id.get();
     }
 }
