@@ -16,8 +16,8 @@ public class DBConnection {
             try {
 
                 Class.forName("com.mysql.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://db4free.net"+iPort+"/mydb?useSSL=false", "kino_gruppe", "kea2016");
-
+                connection = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7137771", "sql7137771", "c8UcTPxHlK");
+                System.out.println("Succesfully connected");
             } catch(Exception e){
                 e.printStackTrace();
             }

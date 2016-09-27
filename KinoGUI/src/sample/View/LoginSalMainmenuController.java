@@ -15,7 +15,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import org.w3c.dom.css.Rect;
+import sample.Presenter.DBController;
+
 import java.io.*;
+import java.util.ArrayList;
 
 
 //import java.io.IOException;
@@ -32,18 +36,21 @@ public class LoginSalMainmenuController {
     @FXML private Label totalPrice;
     private int tC;
 
-    @FXML private Rectangle s11;
-    @FXML private Rectangle s12;
-    @FXML private Rectangle s13;
-    @FXML private Rectangle s14;
-    @FXML private Rectangle s15;
-    @FXML private Rectangle s16;
-    @FXML private Rectangle s17;
-    @FXML private Rectangle s18;
-    @FXML private Rectangle s19;
-    @FXML private Rectangle s110;
-    @FXML private Rectangle s111;
-    @FXML private Rectangle s112;
+    @FXML private Rectangle s1a1;
+    @FXML private Rectangle s1a2;
+    @FXML private Rectangle s1a3;
+    @FXML private Rectangle s1a4;
+    @FXML private Rectangle s1a5;
+    @FXML private Rectangle s1a6;
+    @FXML private Rectangle s1a7;
+    @FXML private Rectangle s1a8;
+    @FXML private Rectangle s1a9;
+    @FXML private Rectangle s1a10;
+    @FXML private Rectangle s1a11;
+    @FXML private Rectangle s1a12;
+
+
+
 
     public static void initializeController(Stage stage){
         mainStage = stage;
@@ -84,6 +91,8 @@ public class LoginSalMainmenuController {
     }
 
     public void reserveButtonClicked() throws IOException {
+
+        updateSeatColors();
 
         Parent cinemaParent = FXMLLoader.load(getClass().getResource("sal.fxml"));
         Scene cinemaScene = new Scene(cinemaParent);
@@ -154,4 +163,46 @@ public class LoginSalMainmenuController {
         ticketCount.setText(""+tC);
         totalPrice.setText(""+tC*85+" Kroner");
     }
+
+    public ArrayList getHall(){
+
+
+        ArrayList<Rectangle> hall = new ArrayList<>();
+
+        hall.add(s1a1);
+        hall.add(s1a2);
+        hall.add(s1a3);
+        hall.add(s1a4);
+        hall.add(s1a5);
+        hall.add(s1a6);
+        hall.add(s1a7);
+        hall.add(s1a8);
+        hall.add(s1a9);
+        hall.add(s1a10);
+        hall.add(s1a11);
+        hall.add(s1a12);
+
+
+
+        return hall;
+    }
+
+    public void updateSeatColors(){
+
+        ArrayList<Rectangle> hall = getHall();
+        ArrayList<Rectangle> ReservedSeats = DBController.readShowToSeats(1);
+
+        for (Rectangle rSeat: ReservedSeats ){
+
+            //System.out.println(rSeat);
+
+            for (Rectangle seat: hall ){
+
+                //System.out.println(seat);
+            }
+        }
+    }
+
+
+
 }
