@@ -14,9 +14,8 @@ public class DBConnection {
             Connection connection = null;
 
             try {
-
                 Class.forName("com.mysql.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://db4free.net"+iPort+"/mydb?useSSL=false", "kino_gruppe", "kea2016");
+                connection = DriverManager.getConnection("jdbc:mysql://db4free.net:"+iPort+"/kea_kino", "kino_gruppe", "kea2016");
 
             } catch(Exception e){
                 e.printStackTrace();

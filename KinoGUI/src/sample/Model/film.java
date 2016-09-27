@@ -31,6 +31,10 @@ public class Film {
         this.hall = new SimpleIntegerProperty(hall);
     }
 
+    public Film(String titel) {
+        this.titel = new SimpleStringProperty(titel);
+    }
+
     //setter & setters
     public String getTitel() {
         return titel.get();
@@ -138,5 +142,10 @@ public class Film {
 
     public void setHall(int hall) {
         this.hall.set(hall);
+    }
+
+    //work with titel!!!!
+    public String toString(){
+        return getTitel();
     }
 }

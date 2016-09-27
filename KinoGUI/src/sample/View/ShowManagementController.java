@@ -9,13 +9,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import sample.Model.Film;
+import sample.Presenter.DBController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ShowManagementController{
 
-
+    public static ObservableList<Film> setDataToComboxObservableList = FXCollections.observableArrayList();
+    public static ObservableList setDataToTableViewObservableList = FXCollections.observableArrayList();
 
     @FXML private CheckBox hallCheckbox1;
     @FXML private CheckBox hallCheckbox2;
@@ -46,12 +49,14 @@ public class ShowManagementController{
     }
 
     public void setDataToCombobox(){
+        DBController dbController = new DBController();
+        dbController.getMovieFromDB();
 
-        ObservableList setDataToComboxObservableList = FXCollections.observableArrayList();
-
-        selectMovieCombo.getItems().clear();
-        //ObservableList to combox
         selectMovieCombo.setItems(setDataToComboxObservableList);
+    }
+
+
+    public void setDataToTableview(){
 
 
     }

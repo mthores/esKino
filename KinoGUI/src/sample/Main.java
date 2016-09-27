@@ -4,13 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-<<<<<<< HEAD
 
-import javafx.scene.control.Button;
-
-=======
-import javafx.scene.control.Button;
->>>>>>> 589a8bbf25d5453d1a816104bcf2cd7c0569d2c3
 import javafx.scene.control.TableView;
 
 import javafx.stage.Stage;
@@ -20,10 +14,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("View/ShowMangement.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("View/login.fxml"));
         LoginSalMainmenuController.initializeController(primaryStage);
         primaryStage.setTitle("EsKino");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 1280, 820));
         primaryStage.show();
 
 
