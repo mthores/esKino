@@ -91,7 +91,6 @@ public class LoginSalMainmenuController {
     }
 
     @FXML TableView <Object> tW2 = new TableView<>();
-
     public void administrationButtonClicked() throws  IOException {
         Parent administrationParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
         Scene administrationScene = new Scene(administrationParent);
@@ -104,6 +103,7 @@ public class LoginSalMainmenuController {
                     System.out.println(rowData);
                 }
             });
+            return row;
         });
 
 
