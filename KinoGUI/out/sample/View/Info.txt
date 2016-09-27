@@ -1,0 +1,4 @@
+View skal indeholder:
+
+GUI
+FXML filer samt deres controller klasse 
