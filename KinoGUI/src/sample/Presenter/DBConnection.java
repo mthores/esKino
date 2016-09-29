@@ -15,7 +15,10 @@ public class DBConnection {
 
             try {
                 Class.forName("com.mysql.jdbc.Driver");
+<<<<<<< HEAD
 
+=======
+>>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
                 connection = DriverManager.getConnection("jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7137771", "sql7137771", "c8UcTPxHlK");
                 System.out.println("Succesfully connected");
 

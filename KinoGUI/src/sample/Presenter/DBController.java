@@ -64,6 +64,7 @@ public class DBController {
         return seats;
     }
 
+<<<<<<< HEAD
         public static void writeReservations(Shows show, Customer customer, String seat_id) {
             try {
                 String sqlString = "INSERT INTO Reservation (reservation_id, Film_title, Customer_id, shows_id, seat_id)" +
@@ -75,6 +76,14 @@ public class DBController {
                 prepared.setString(3, customer.getPhoneNumber());
                 prepared.setInt(4, show.getID());
                 prepared.setString(5, seat_id);
+=======
+    public static void writeReservations(Shows show, Customer customer, String seat_id) {
+        try {
+            String sqlString = "INSERT INTO Reservation (reservation_id, Film_title, Customer_id, shows_id, seat_id)" +
+                    "VALUES (DEFAULT , ?, ?, ?, ?, ?)";
+
+            PreparedStatement prepared = DBConnection.getConnection().prepareStatement(sqlString);
+>>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
 
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -98,6 +107,7 @@ public class DBController {
 
         }
 
+<<<<<<< HEAD
         //gets movies from db and adds to show management
         public void getMovieFromDB() {
             Connection conn;
@@ -124,6 +134,12 @@ public class DBController {
 
     public void buildDataShowManagement(Shows shows){
 
+=======
+    }
+
+    //gets movies from db and adds to show management
+    public void getMovieFromDB(){
+>>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
         Connection conn;
         PreparedStatement ps;
         String sql = "Insert Into Shows (shows_Id, movie_Title, cinema_Hall, Date, Time) Values (default, ?, ?, ?, ?)";
@@ -148,6 +164,7 @@ public class DBController {
         }
     }
 
+<<<<<<< HEAD
     public void refreshTableview(){
 
         Connection conn;
@@ -177,4 +194,6 @@ public class DBController {
         }
     }
 
+=======
+>>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
 }

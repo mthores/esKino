@@ -1,8 +1,13 @@
 package sample.View;
 
+<<<<<<< HEAD
 import javafx.animation.PauseTransition;
+=======
+import javafx.collections.ObservableList;
+>>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -12,6 +17,8 @@ import javafx.scene.control.TableRow;
 
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -38,21 +45,6 @@ public class LoginSalMainmenuController {
     @FXML private Label ticketCount;
     @FXML private Label totalPrice;
     private int tC;
-
-    @FXML private Rectangle s1a1;
-    @FXML private Rectangle s1a2;
-    @FXML private Rectangle s1a3;
-    @FXML private Rectangle s1a4;
-    @FXML private Rectangle s1a5;
-    @FXML private Rectangle s1a6;
-    @FXML private Rectangle s1a7;
-    @FXML private Rectangle s1a8;
-    @FXML private Rectangle s1a9;
-    @FXML private Rectangle s1a10;
-    @FXML private Rectangle s1a11;
-    @FXML private Rectangle s1a12;
-
-
 
 
     public static void initializeController(Stage stage){
@@ -95,11 +87,16 @@ public class LoginSalMainmenuController {
 
     public void reserveButtonClicked() throws IOException {
 
-        updateSeatColors();
-
         Parent cinemaParent = FXMLLoader.load(getClass().getResource("sal.fxml"));
         Scene cinemaScene = new Scene(cinemaParent);
         mainStage.setScene(cinemaScene);
+
+        HBox seatBox = (HBox) cinemaParent.getScene().getRoot().lookup("#seatBox");
+        ObservableList<Node> seatList = seatBox.getChildren();
+        updateSeatColors(seatList);
+
+        System.out.println("Hello");
+
     }
 
     public void toShowManagementButtonClicked() throws IOException {
@@ -181,45 +178,21 @@ public class LoginSalMainmenuController {
         totalPrice.setText(""+tC*85+" Kroner");
     }
 
-    public ArrayList getHall(){
+    public void updateSeatColors(ObservableList<Node> seatList){
 
+        ArrayList<Rectangle> reservedSeats = DBController.readShowToSeats(1);
 
-        ArrayList<Rectangle> hall = new ArrayList<>();
+        for (Rectangle rSeat: reservedSeats ){
 
-        hall.add(s1a1);
-        hall.add(s1a2);
-        hall.add(s1a3);
-        hall.add(s1a4);
-        hall.add(s1a5);
-        hall.add(s1a6);
-        hall.add(s1a7);
-        hall.add(s1a8);
-        hall.add(s1a9);
-        hall.add(s1a10);
-        hall.add(s1a11);
-        hall.add(s1a12);
+            for (Node seat: seatList ){
 
-
-
-        return hall;
-    }
-
-    public void updateSeatColors(){
-
-        ArrayList<Rectangle> hall = getHall();
-        ArrayList<Rectangle> ReservedSeats = DBController.readShowToSeats(1);
-
-        for (Rectangle rSeat: ReservedSeats ){
-
-            //System.out.println(rSeat);
-
-            for (Rectangle seat: hall ){
-
-                //System.out.println(seat);
+                if(rSeat.getId().equals(seat.getId())){
+                    Rectangle redSeat = (Rectangle) seat;
+                    redSeat.setFill(Color.RED);
+                }
             }
         }
     }
-
 
 
 }

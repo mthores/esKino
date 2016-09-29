@@ -32,7 +32,7 @@
               </FXCollections>
           </items>
       </ComboBox>
-      <ComboBox fx:id="selectMovieCombo" layoutX="105.0" layoutY="180.0" prefWidth="150.0" promptText="Select movie" />
+      <ComboBox fx:id="selectMovieCombo" layoutX="105.0" layoutY="180.0" onMouseClicked="#setDataToCombobox" prefWidth="150.0" promptText="Select movie" />
       <DatePicker fx:id="datepicker" layoutX="105.0" layoutY="310.0" />
       <Label layoutX="454.0" layoutY="49.0" text="Show manangement">
          <font>
@@ -50,6 +50,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="savedshowButton" layoutX="279.0" layoutY="478.0" mnemonicParsing="false" text="Save show" />
+      <Button fx:id="savedshowButton" layoutX="279.0" layoutY="478.0" mnemonicParsing="false" onAction="#setDataToTableview" text="Save show" />
    </children>
 </AnchorPane>
