@@ -39,6 +39,7 @@ public class LoginSalMainmenuController {
     @FXML private Label ticketCount;
     @FXML private Label totalPrice;
     private int tC;
+    private int ticketPrice;
 
 
     public static void initializeController(Stage stage){
@@ -87,9 +88,9 @@ public class LoginSalMainmenuController {
 
         HBox seatBox = (HBox) cinemaParent.getScene().getRoot().lookup("#seatBox");
         ObservableList<Node> seatList = seatBox.getChildren();
+        ticketPrice = DBController.getPriceFromMovie("Pochahotass");
+        System.out.println(ticketPrice +" 1");
         updateSeatColors(seatList);
-
-        System.out.println("Hello");
 
     }
 
@@ -150,12 +151,13 @@ public class LoginSalMainmenuController {
                 tC--;
             }
 
-            updateTicketCounters();
+            updateTicketCounters(ticketPrice);
         }
 
-    public void updateTicketCounters(){
+    public void updateTicketCounters(int ticketPrice){
+
         ticketCount.setText(""+tC);
-        totalPrice.setText(""+tC*85+" Kroner");
+        totalPrice.setText(""+tC*ticketPrice+" Kroner");
     }
 
     public void updateSeatColors(ObservableList<Node> seatList){

@@ -35,14 +35,12 @@ public class DBController {
 
         Connection connection = null;
 
-
         Statement statement = null;
         String sqlQuery = "SELECT * FROM Reservation WHERE shows_Id = '"+showId+"';";
 
         ResultSet resultSet = null;
 
         ArrayList<Rectangle> seats = new ArrayList<>();
-
 
         try {
             connection = DBConnection.getConnection();
@@ -60,8 +58,6 @@ public class DBController {
 
             }
 
-            System.out.println("success");
-
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -74,6 +70,42 @@ public class DBController {
                 }
             }
         return seats;
+    }
+
+    public static int getPriceFromMovie(String movieName){
+
+        Connection connection = null;
+
+        Statement statement = null;
+        String sqlQuery = "SELECT Ticket_price FROM Film WHERE Film_title = '"+movieName+"';";
+        int price = 0;
+
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while(resultSet.next()){
+
+                price = resultSet.getInt("Ticket_price");
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return price;
     }
 
     public static void writeReservations(Shows show, Customer customer, String seat_id) {
