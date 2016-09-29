@@ -34,15 +34,9 @@ public class LoginSalMainmenuController {
     ShowManagementController showManagementController = new ShowManagementController();
 
     private static MouseEvent e;
-<<<<<<< HEAD
-    private static Stage mainStage;
+    public static Stage mainStage;
     @FXML public static TextField username;
     @FXML public static PasswordField password;
-=======
-    public static Stage mainStage;
-    @FXML private TextField username;
-    @FXML private PasswordField password;
->>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
 
     @FXML private Label infoLabelCinema;
     @FXML private Label ticketCount;

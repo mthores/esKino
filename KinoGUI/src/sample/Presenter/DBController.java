@@ -16,14 +16,6 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
-<<<<<<< HEAD
-
-
-/**
- * Created by Mikkel on 27/09/2016.
- */
-=======
->>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
 public class DBController {
 
 
@@ -31,14 +23,6 @@ public class DBController {
 
         Connection connection = null;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 6c152c5e9c6f10f2962756949dde6c5fd7e2ec1d
->>>>>>> fdb3826690738d6257cc7e95705b2aa933944839
         Statement statement = null;
         String sqlQuery = "SELECT * FROM Reservation WHERE shows_Id = '" + showId + "';";
 
@@ -62,17 +46,6 @@ public class DBController {
 
             }
 
-<<<<<<< HEAD
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (statement != null) {
-                    try {
-                        statement.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-=======
             System.out.println("success");
 
         } catch (Exception e) {
@@ -83,16 +56,13 @@ public class DBController {
                     statement.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
->>>>>>> 6c152c5e9c6f10f2962756949dde6c5fd7e2ec1d
+
                 }
             }
         }
         return seats;
     }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
     public static int getPriceFromMovie(String movieName){
 
         Connection connection = null;
@@ -129,22 +99,6 @@ public class DBController {
         return price;
     }
 
-=======
-<<<<<<< HEAD
-        public static void writeReservations(Shows show, Customer customer, String seat_id) {
-            try {
-                String sqlString = "INSERT INTO Reservation (reservation_id, Film_title, Customer_id, shows_id, seat_id)" +
-                        "VALUES (DEFAULT , ?, ?, ?, ?, ?)";
-
-                PreparedStatement prepared = DBConnection.getConnection().prepareStatement(sqlString);
-
-                prepared.setString(2, show.getMovieTitel());
-                prepared.setString(3, customer.getPhoneNumber());
-                prepared.setInt(4, show.getID());
-                prepared.setString(5, seat_id);
-=======
->>>>>>> 6c152c5e9c6f10f2962756949dde6c5fd7e2ec1d
->>>>>>> fdb3826690738d6257cc7e95705b2aa933944839
     public static void writeReservations(Shows show, Customer customer, String seat_id) {
         try {
             String sqlString = "INSERT INTO Reservation (reservation_id, Film_title, Customer_id, shows_id, seat_id)" +
@@ -205,26 +159,14 @@ public class DBController {
 
 
     //gets movies from db and adds to show management
-<<<<<<< HEAD
-    public void buildDataShowManagement(Shows shows){
-=======
-<<<<<<< HEAD
-    public void getMovieFromDB() {
-=======
-    public void getMovieFromDB(){
->>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
->>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
->>>>>>> fdb3826690738d6257cc7e95705b2aa933944839
+
+    public void buildDataShowManagement(Shows shows) {
+
         Connection conn;
         PreparedStatement ps;
         String sql = "Insert Into Shows (shows_Id, movie_Title, cinema_Hall, Date, Time) Values (default, ?, ?, ?, ?)";
 
-<<<<<<< HEAD
         try {
-=======
-        try{
-
->>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
             conn = DBConnection.getConnection();
             ps = conn.prepareStatement(sql);
 
@@ -234,16 +176,10 @@ public class DBController {
             ps.setString(4, shows.getTime());
 
             ps.executeUpdate();
-
-<<<<<<< HEAD
-            while (rsl.next()) {
-                ShowManagementController.setDataToComboxObservableList.add(new Film(
-                        rsl.getString("Film_title")
-=======
             ps.close();
             conn.close();
 
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -267,24 +203,17 @@ public class DBController {
                 rs.getInt("cinema_Hall"),
                 rs.getString("Date"),
                 rs.getString("Time")
->>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
                 ));
             }
             rs.close();
             conn.close();
 
-<<<<<<< HEAD
-        } catch (Exception e) {
-=======
         }catch (Exception e){
->>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
             e.printStackTrace();
         }
     }
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
     //Checking login info from the DB
     public static boolean loginCheck() {
 
@@ -318,9 +247,5 @@ public class DBController {
         return check;
 
     }
-=======
-=======
->>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
->>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
->>>>>>> fdb3826690738d6257cc7e95705b2aa933944839
+
 }
