@@ -3,16 +3,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sample.Model.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 import sample.Model.Film;
 import sample.View.LoginSalMainmenuController;
 import sample.View.ShowManagementController;
-
-import java.sql.ResultSet;
 
 import javafx.scene.shape.Rectangle;
 import sun.rmi.runtime.Log;
@@ -318,5 +313,57 @@ public class DBController {
             e.printStackTrace();
         }
     }
+
+    public void deletedFromFilm(Object film){
+        Film selectedFilm = (Film) film;
+
+        Connection conn;
+        PreparedStatement pre;
+        String sql = "Delete from Film where Film_title = ?";
+
+        try{
+            conn = DBConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+
+            pre.setString(1,selectedFilm.getTitel());
+
+            pre.execute();
+            pre.close();
+            conn.close();
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+    public void deletedFromShowMangement (Object show){
+        Shows selectedMovie = (Shows) show;
+
+        Connection conn;
+        PreparedStatement pre;
+        String sql = "Delete from Shows where movie_Title = ? AND cinema_hall = ? AND Date = ? AND Time = ?";
+
+        try{
+            conn = DBConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+
+            pre.setString(1,selectedMovie.getMovieTitel());
+            pre.setInt(2, selectedMovie.getCinemaHall());
+            pre.setDate(3, Date.valueOf(selectedMovie.getDate()));
+            pre.setString(4,selectedMovie.getTime());
+
+            pre.execute();
+            pre.close();
+            conn.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
 
 }

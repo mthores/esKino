@@ -1,6 +1,7 @@
 package sample.View;
 
 import javafx.animation.PauseTransition;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -121,7 +122,18 @@ public class LoginSalMainmenuController {
         Scene addMovieScene = new Scene(addMovieParent);
         mainStage.setScene(addMovieScene);
     }
+    public void redigereButtonClicked() throws IOException{
 
+        Parent editMovieParent = FXMLLoader.load(getClass().getResource("EditMovie.fxml"));
+        Scene editMovieScene = new Scene(editMovieParent);
+        mainStage.setScene(editMovieScene);
+    }
+    public void cancelButtonClicked() throws IOException{
+
+        Parent cancelParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
+        Scene cancelScene = new Scene(cancelParent);
+        mainStage.setScene(cancelScene);
+    }
 
     @FXML TableView <Film> tW2 = new TableView<>();
 
@@ -227,6 +239,45 @@ public class LoginSalMainmenuController {
         SolgteCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("ticketSold"));
 
         tW2.setItems(filmObservableList);
+
+    }
+
+    public void removeFilm(){
+        SimpleIntegerProperty index = new SimpleIntegerProperty();
+
+        DBController dbController = new DBController();
+
+        dbController.deletedFromFilm(tW2.getSelectionModel().getSelectedItem());
+        filmObservableList.remove(index.get());
+        tW2.getSelectionModel().clearSelection();
+    }
+
+    public void editButtonClicked2() {
+
+        try {
+            redigereButtonClicked();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+        tW2.setRowFactory(tv -> {
+            TableRow tableRow = new TableRow();
+
+                    Film film = (Film) tW2.getSelectionModel().getSelectedItem();
+
+                    AddMovieController amc = new AddMovieController();
+
+                    amc.titelText.setText(film.getTitel());
+                    amc.descriptionArea.setText(film.getDescription());
+                    amc.durationText.setText(film.getDuration());
+                    amc.ticketPriceText.setText(Integer.toString(film.getTicketPrice()));
+                    amc.lincensPriceText.setText(Integer.toString(film.getLicensPrice()));
+                    amc.genreCombo.setValue(film.getGenre());
+                    amc.ratingCombo.setValue(film.getRating());
+
+            return tableRow;
+            });
+
 
     }
 
