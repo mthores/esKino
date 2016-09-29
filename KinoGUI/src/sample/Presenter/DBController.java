@@ -1,34 +1,29 @@
 package sample.Presenter;
 import sample.Model.*;
-import sample.Presenter.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-import javafx.collections.ObservableList;
 import sample.Model.Film;
 import sample.View.LoginSalMainmenuController;
 import sample.View.ShowManagementController;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 
 import javafx.scene.shape.Rectangle;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 
 
 /**
  * Created by Mikkel on 27/09/2016.
  */
+=======
+>>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
 public class DBController {
 
 
@@ -37,12 +32,13 @@ public class DBController {
         Connection connection = null;
 
 
+
         Statement statement = null;
         String sqlQuery = "SELECT * FROM Reservation WHERE shows_Id = '" + showId + "';";
 
         ResultSet resultSet = null;
 
-        ArrayList<Rectangle> seats = new ArrayList<>();
+        ArrayList<Rectangle> seats = new ArrayList();
 
 
         try {
@@ -77,64 +73,155 @@ public class DBController {
         return seats;
     }
 
+<<<<<<< HEAD
+        public static void writeReservations(Shows show, Customer customer, String seat_id) {
+            try {
+                String sqlString = "INSERT INTO Reservation (reservation_id, Film_title, Customer_id, shows_id, seat_id)" +
+                        "VALUES (DEFAULT , ?, ?, ?, ?, ?)";
+
+                PreparedStatement prepared = DBConnection.getConnection().prepareStatement(sqlString);
+
+                prepared.setString(2, show.getMovieTitel());
+                prepared.setString(3, customer.getPhoneNumber());
+                prepared.setInt(4, show.getID());
+                prepared.setString(5, seat_id);
+=======
     public static void writeReservations(Shows show, Customer customer, String seat_id) {
         try {
             String sqlString = "INSERT INTO Reservation (reservation_id, Film_title, Customer_id, shows_id, seat_id)" +
                     "VALUES (DEFAULT , ?, ?, ?, ?, ?)";
 
             PreparedStatement prepared = DBConnection.getConnection().prepareStatement(sqlString);
+>>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
 
-            prepared.setString(2, show.getMovieTitel());
-            prepared.setString(3, customer.getPhoneNumber());
-            prepared.setInt(4, show.getID());
-            prepared.setString(5, seat_id);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
-    }
+        public static void updateSoldTickets(Film film, int tickets) {
 
-    public static void updateSoldTickets(Film film, int tickets) {
+            try {
+                Statement statement = DBConnection.getConnection().createStatement();
 
-        try {
-            Statement statement = DBConnection.getConnection().createStatement();
+                String sqlString = "UPDATE sql7137771.Film SET Tickets_Sold = " +
+                        tickets + " WHERE Film_title = " + film.getTitel() + ";";
 
-            String sqlString = "UPDATE sql7137771.Film SET Tickets_Sold = " +
-                    tickets + " WHERE Film_title = " + film.getTitel() + ";";
+                statement.executeUpdate(sqlString);
 
-            statement.executeUpdate(sqlString);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
 
+<<<<<<< HEAD
+        //gets movies from db and adds to show management
+        public void getMovieFromDB() {
+            Connection conn;
+
+            try {
+                conn = DBConnection.getConnection();
+                String sql = "Select Film_title from Film";
+                ResultSet rsl = conn.createStatement().executeQuery(sql);
+
+                ShowManagementController.setDataToComboxObservableList.clear();
+
+                while (rsl.next()) {
+                    ShowManagementController.setDataToComboxObservableList.add(new Film(
+                            rsl.getString("Film_title")
+                    ));
+                }
+                rsl.close();
+                conn.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    public void buildDataShowManagement(Shows shows){
+
+=======
     }
 
     //gets movies from db and adds to show management
+<<<<<<< HEAD
     public void getMovieFromDB() {
+=======
+    public void getMovieFromDB(){
+>>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
+>>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
         Connection conn;
+        PreparedStatement ps;
+        String sql = "Insert Into Shows (shows_Id, movie_Title, cinema_Hall, Date, Time) Values (default, ?, ?, ?, ?)";
 
+<<<<<<< HEAD
         try {
+=======
+        try{
+
+>>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
             conn = DBConnection.getConnection();
-            String sql = "Select Film_title from Film";
-            ResultSet rsl = conn.createStatement().executeQuery(sql);
+            ps = conn.prepareStatement(sql);
 
-            ShowManagementController.setDataToComboxObservableList.clear();
+            ps.setString(1, shows.getMovieTitel());
+            ps.setInt(2, shows.getCinemaHall());
+            ps.setString(3, shows.getDate());
+            ps.setString(4, shows.getTime());
 
+            ps.executeUpdate();
+
+<<<<<<< HEAD
             while (rsl.next()) {
                 ShowManagementController.setDataToComboxObservableList.add(new Film(
                         rsl.getString("Film_title")
-                ));
-            }
-            rsl.close();
+=======
+            ps.close();
             conn.close();
 
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
 
+<<<<<<< HEAD
+    public void refreshTableview(){
+
+        Connection conn;
+
+        try{
+
+            conn = DBConnection.getConnection();
+            String sql = "Select movie_Title, cinema_Hall, Date, Time From Shows";
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+            //deletes old data and gets fresh data from db
+            ShowManagementController.setDataToTableViewObservableList.clear();
+
+            //set all the data from db into an ObservableList
+            while(rs.next()){
+                ShowManagementController.setDataToTableViewObservableList.add(new Shows(
+                rs.getString("movie_Title"),
+                rs.getInt("cinema_Hall"),
+                rs.getString("Date"),
+                rs.getString("Time")
+>>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
+                ));
+            }
+            rs.close();
+            conn.close();
+
+<<<<<<< HEAD
+        } catch (Exception e) {
+=======
+        }catch (Exception e){
+>>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
+            e.printStackTrace();
+        }
+    }
+
+<<<<<<< HEAD
     //Checking login info from the DB
     public static boolean loginCheck() {
 
@@ -168,4 +255,8 @@ public class DBController {
         return check;
 
     }
+=======
+=======
+>>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
+>>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
 }

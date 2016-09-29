@@ -5,20 +5,28 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import sample.Model.Film;
+import sample.Model.Shows;
+import sample.Presenter.DBConnection;
 import sample.Presenter.DBController;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ShowManagementController{
+
+    DBController dbController = new DBController();
+
 
     public static ObservableList<Film> setDataToComboxObservableList = FXCollections.observableArrayList();
     public static ObservableList setDataToTableViewObservableList = FXCollections.observableArrayList();
@@ -28,12 +36,22 @@ public class ShowManagementController{
     @FXML private DatePicker datepicker;
     @FXML private ComboBox selectMovieCombo;
     @FXML private ComboBox selectTimeCombo;
+    @FXML private TableColumn<Shows, String> tableColTitel;
+    @FXML private TableColumn<Shows, String> tableColTime;
+    @FXML private TableColumn<Shows, Integer> tableColHall;
+    @FXML private TableColumn<Shows, String> tableColDate;
+    @FXML private TableView<Shows> showTableView;
 
-    public void selectedMovieFromDB(){
 
+    public void toFilmButtonClicked() throws IOException {
+
+        Parent filmParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
+        Scene filmScene = new Scene(filmParent);
+        LoginSalMainmenuController.mainStage.setScene(filmScene);
 
     }
 
+    @FXML
     public int selectedCheckbox(){
 
         int count=0;
@@ -50,6 +68,7 @@ public class ShowManagementController{
 
     }
 
+    @FXML
     public void setDataToCombobox(){
         DBController dbController = new DBController();
         dbController.getMovieFromDB();
@@ -57,8 +76,8 @@ public class ShowManagementController{
         selectMovieCombo.setItems(setDataToComboxObservableList);
     }
 
-
-    public void setDataToTableview(){
+    @FXML
+    public void savedataToDB(){
 
         String selectedCombo;
         String date;
@@ -67,18 +86,28 @@ public class ShowManagementController{
 
         selectedCombo = selectMovieCombo.getSelectionModel().getSelectedItem().toString();
         hall = selectedCheckbox();
-        date = String.valueOf(datepicker.getValue().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        date = String.valueOf(datepicker.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         selectedTimeCombo = selectTimeCombo.getSelectionModel().getSelectedItem().toString();
 
-        System.out.println("Movie: " + selectedCombo);
-        System.out.println("sal: " + hall);
-        System.out.println("date: " + date);
-        System.out.println("tid: " + selectedTimeCombo);
+        Shows newShows = new Shows(selectedCombo, hall, date, selectedTimeCombo);
+
+        dbController.buildDataShowManagement(newShows);
+
+        setDataToTableview();
+    }
+
+    @FXML
+    public void setDataToTableview(){
+
+        dbController.refreshTableview();
+
+        tableColTitel.setCellValueFactory(new PropertyValueFactory<>("movieTitel"));
+        tableColHall.setCellValueFactory(new PropertyValueFactory<>("cinemaHall"));
+        tableColDate.setCellValueFactory(new PropertyValueFactory<>("date"));
+        tableColTime.setCellValueFactory(new PropertyValueFactory<>("time"));
 
 
-
-
-
+        showTableView.setItems(setDataToTableViewObservableList);
 
     }
 
