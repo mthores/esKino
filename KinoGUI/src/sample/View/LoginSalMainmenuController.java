@@ -22,6 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import sample.Model.Film;
@@ -41,8 +42,8 @@ public class LoginSalMainmenuController {
 
     private static MouseEvent e;
     public static Stage mainStage;
-    @FXML public static TextField username;
-    @FXML public static PasswordField password;
+    //@FXML public static TextField username;
+    //@FXML public static PasswordField password;
 
     @FXML private Label infoLabelCinema;
     @FXML private Label ticketCount;
@@ -57,14 +58,19 @@ public class LoginSalMainmenuController {
 
     public void loginButtonClicked() throws IOException {
 
-        if(true == DBController.loginCheck()) {
+        TextField tF = (TextField) mainStage.getScene().getRoot().lookup("#username");
+        TextField pF = (TextField) mainStage.getScene().getRoot().lookup("#password");
+        
+        if(true == DBController.loginCheck(tF.getText(),pF.getText())) {
             System.out.println("logged in succesfully!");
 
             toMenuButtonClicked();
 
 
         } else {
-            System.out.println("login failed. Bad credentials!");
+            tF.clear();
+            pF.clear();
+            System.out.println("login failed.");
         }
     }
 
@@ -130,6 +136,7 @@ public class LoginSalMainmenuController {
     }
 
     @FXML TableView <Film> tW2 = new TableView<>();
+
 
     public void administrationButtonClicked() throws  IOException {
         Parent administrationParent = FXMLLoader.load(getClass().getResource("Film.fxml"));

@@ -10,6 +10,7 @@ import sample.View.LoginSalMainmenuController;
 import sample.View.ShowManagementController;
 
 import javafx.scene.shape.Rectangle;
+import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 
@@ -214,28 +215,37 @@ public class DBController {
 
 
     //Checking login info from the DB
-    public static boolean loginCheck() {
+    public static boolean loginCheck(String tF,String pF) {
+
 
         Connection conn;
+        String Login_Name = "";
+        String Login_Password = "";
         boolean check = false;
+        String name = tF;
+        String password = pF;
+
 
         try {
             conn = DBConnection.getConnection();
 
             Statement mystate = conn.createStatement();
 
-            ResultSet rs = mystate.executeQuery("Select * Where "
-                    + "Login_name"
-                    + "="
-                    + LoginSalMainmenuController.username.getText());
+            ResultSet rs = mystate.executeQuery
+                    ("Select * FROM Login WHERE Login_name = '"+name+"'");
 
-            if (rs.next()) {
-               String Login_Name = rs.getString("Login_name");
-                System.out.println(Login_Name);
-                return true;
+
+            while(rs.next()) {
+                Login_Name = rs.getString("Login_name");
+                Login_Password = rs.getString("Login_pass");
+
+
+            }
+            if (name.equals(Login_Name)&& password.equals(Login_Password) ){
+                check= true;
 
             } else {
-                return false;
+                check = false;
             }
 
 
