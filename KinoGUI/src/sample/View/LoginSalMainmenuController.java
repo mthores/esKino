@@ -34,14 +34,21 @@ public class LoginSalMainmenuController {
     ShowManagementController showManagementController = new ShowManagementController();
 
     private static MouseEvent e;
+<<<<<<< HEAD
+    private static Stage mainStage;
+    @FXML public static TextField username;
+    @FXML public static PasswordField password;
+=======
     public static Stage mainStage;
     @FXML private TextField username;
     @FXML private PasswordField password;
+>>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
 
     @FXML private Label infoLabelCinema;
     @FXML private Label ticketCount;
     @FXML private Label totalPrice;
     private int tC;
+    private int ticketPrice;
 
 
     public static void initializeController(Stage stage){
@@ -50,7 +57,7 @@ public class LoginSalMainmenuController {
 
     public void loginButtonClicked() throws IOException {
 
-        if(username.getText().equals("admin") && password.getText().equals("admin")) {
+        if(true == DBController.loginCheck()) {
             System.out.println("logged in succesfully!");
 
             toMenuButtonClicked();
@@ -90,9 +97,9 @@ public class LoginSalMainmenuController {
 
         HBox seatBox = (HBox) cinemaParent.getScene().getRoot().lookup("#seatBox");
         ObservableList<Node> seatList = seatBox.getChildren();
+        ticketPrice = DBController.getPriceFromMovie("Pochahotass");
+        System.out.println(ticketPrice +" 1");
         updateSeatColors(seatList);
-
-        System.out.println("Hello");
 
     }
 
@@ -167,12 +174,13 @@ public class LoginSalMainmenuController {
                 tC--;
             }
 
-            updateTicketCounters();
+            updateTicketCounters(ticketPrice);
         }
 
-    public void updateTicketCounters(){
+    public void updateTicketCounters(int ticketPrice){
+
         ticketCount.setText(""+tC);
-        totalPrice.setText(""+tC*85+" Kroner");
+        totalPrice.setText(""+tC*ticketPrice+" Kroner");
     }
 
     public void updateSeatColors(ObservableList<Node> seatList){

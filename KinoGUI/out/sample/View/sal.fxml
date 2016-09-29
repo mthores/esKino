@@ -26,7 +26,7 @@
          <children>
             <VBox alignment="CENTER" layoutX="56.0" layoutY="70.0" prefHeight="274.0" prefWidth="305.0">
                <children>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                  <HBox fx:id="seatBox" alignment="CENTER" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
                         <Rectangle fx:id="s1a1" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
                         <Rectangle fx:id="s1a2" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
