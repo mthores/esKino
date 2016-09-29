@@ -4,6 +4,7 @@ import javafx.animation.PauseTransition;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,11 +23,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.Model.Shows;
 import sample.Model.Film;
 import sample.Presenter.DBController;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,8 +43,8 @@ public class LoginSalMainmenuController {
 
     private static MouseEvent e;
     public static Stage mainStage;
-    @FXML public static TextField username;
-    @FXML public static PasswordField password;
+    //@FXML public static TextField username;
+    //@FXML public static PasswordField password;
 
     @FXML private Label infoLabelCinema;
     @FXML private Label ticketCount;
@@ -57,14 +59,19 @@ public class LoginSalMainmenuController {
 
     public void loginButtonClicked() throws IOException {
 
-        if(true == DBController.loginCheck()) {
+        TextField tF = (TextField) mainStage.getScene().getRoot().lookup("#username");
+        TextField pF = (TextField) mainStage.getScene().getRoot().lookup("#password");
+        
+        if(true == DBController.loginCheck(tF.getText(),pF.getText())) {
             System.out.println("logged in succesfully!");
 
             toMenuButtonClicked();
 
 
         } else {
-            System.out.println("login failed. Bad credentials!");
+            tF.clear();
+            pF.clear();
+            System.out.println("login failed.");
         }
     }
 
@@ -80,7 +87,59 @@ public class LoginSalMainmenuController {
         Parent reservationParent = FXMLLoader.load(getClass().getResource("reservationsside.fxml"));
         Scene reservationScene = new Scene(reservationParent);
         mainStage.setScene(reservationScene);
+
+        //Movie ComboBox
+        ComboBox cbTitles = (ComboBox) reservationParent.getScene().getRoot().lookup("#movieCB");
+        ObservableList<String> movieTitles = DBController.readMovieTitles();
+        cbTitles.setItems(movieTitles);
+
+
+
+        //Show ComboBox
+        ComboBox cbShows = (ComboBox) reservationParent.getScene().getRoot().lookup("#showCB");
+        cbShows.setDisable(true);
+
+        cbTitles.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                cbShows.setDisable(false);
+
+            }
+        });
+
+        cbShows.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                Label warningLabel = (Label) reservationParent.getScene().getRoot().lookup("#warninglabel");
+
+                if (cbTitles.getSelectionModel().getSelectedItem() == null) {
+                    warningLabel = (Label) reservationParent.getScene().getRoot().lookup("#warninglabel");
+                    warningLabel.setText("Ingen film valgt");
+                    cbShows.setDisable(true);
+
+                } else {
+                    warningLabel.setText("");
+                    cbShows.setDisable(false);
+                    System.out.println(cbTitles.getPromptText());
+
+                    System.out.println(cbTitles.getSelectionModel().getSelectedItem().toString());
+                    ObservableList<Shows> shows = DBController.readShowsOfMovie(cbTitles.getSelectionModel().getSelectedItem().toString());
+
+                    ObservableList<String> showData = pullShowData(shows);
+                    //System.out.println(showData);
+                    //System.out.println("Det virker");
+                    cbShows.setItems(showData);
+                }
+            }
+        });
+
+
     }
+
+
+
 
     public void toMenuButtonClicked() throws IOException {
 
@@ -95,11 +154,10 @@ public class LoginSalMainmenuController {
         Scene cinemaScene = new Scene(cinemaParent);
         mainStage.setScene(cinemaScene);
 
+
         HBox seatBox = (HBox) cinemaParent.getScene().getRoot().lookup("#seatBox");
         ObservableList<Node> seatList = seatBox.getChildren();
-        ticketPrice = DBController.getPriceFromMovie("Pochahotass");
-        System.out.println(ticketPrice +" 1");
-        updateSeatColors(seatList);
+        initializeHall(seatList);
 
     }
 
@@ -130,6 +188,7 @@ public class LoginSalMainmenuController {
     }
 
     @FXML TableView <Film> tW2 = new TableView<>();
+
 
     public void administrationButtonClicked() throws  IOException {
         Parent administrationParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
@@ -167,27 +226,33 @@ public class LoginSalMainmenuController {
 
 
     public void seatClicked(MouseEvent e){
-            infoLabelCinema.setText("");
-            Rectangle rect = (Rectangle) e.getSource();
-            Paint rectColor = rect.getFill();
-            String name = rect.getId();
+        infoLabelCinema.setText("");
+        Rectangle rect = (Rectangle) e.getSource();
+        Paint rectColor = rect.getFill();
+        String name = rect.getId();
 
-            if (rectColor == Color.LIMEGREEN) {
-                rect.setFill(Color.DODGERBLUE);
-                tC++;
-            }
-
-            if (rectColor == Color.RED) {
-                infoLabelCinema.setText("Sædet er optaget.");
-            }
-
-            if (rectColor == Color.DODGERBLUE) {
-                rect.setFill(Color.LIMEGREEN);
-                tC--;
-            }
-
-            updateTicketCounters(ticketPrice);
+        if (rectColor == Color.LIMEGREEN) {
+            rect.setFill(Color.DODGERBLUE);
+            tC++;
         }
+
+        if (rectColor == Color.RED) {
+            infoLabelCinema.setText("Sædet er optaget.");
+        }
+
+
+        if (rectColor == Color.DODGERBLUE) {
+            rect.setFill(Color.LIMEGREEN);
+            tC--;
+        }
+
+        if (ticketPrice == 0) {
+            ticketPrice = DBController.getPriceFromMovie("Pochahotass");
+        }
+
+        updateTicketCounters(ticketPrice);
+
+    }
 
     public void updateTicketCounters(int ticketPrice){
 
@@ -195,7 +260,7 @@ public class LoginSalMainmenuController {
         totalPrice.setText(""+tC*ticketPrice+" Kroner");
     }
 
-    public void updateSeatColors(ObservableList<Node> seatList){
+    public void initializeHall(ObservableList<Node> seatList){
 
         ArrayList<Rectangle> reservedSeats = DBController.readShowToSeats(1);
 
@@ -210,6 +275,21 @@ public class LoginSalMainmenuController {
             }
         }
     }
+
+    public ObservableList<String> pullShowData(ObservableList<Shows> oL){
+
+        ObservableList<String> dataListe = FXCollections.observableArrayList();
+
+        for (Shows show: oL ){
+            String data = "";
+            data = show.getDate();
+            data += " - kl. " + show.getTime();
+            System.out.println(data);
+            dataListe.add(data);
+        }
+        return dataListe;
+    }
+
 
 
     @FXML   private TableColumn<Film, String> TitelCol;

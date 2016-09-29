@@ -10,6 +10,7 @@ import sample.View.LoginSalMainmenuController;
 import sample.View.ShowManagementController;
 
 import javafx.scene.shape.Rectangle;
+import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 
@@ -45,8 +46,6 @@ public class DBController {
 
             }
 
-            System.out.println("success");
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -60,6 +59,93 @@ public class DBController {
             }
         }
         return seats;
+    }
+
+    public static ObservableList<String> readMovieTitles() {
+
+        Connection connection = null;
+
+        Statement statement = null;
+        String sqlQuery = "SELECT Film_title FROM Film;";
+
+        ResultSet resultSet = null;
+
+        ObservableList<String> movieTitles = FXCollections.observableArrayList();
+
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while (resultSet.next()) {
+
+                String temp = resultSet.getString("Film_title");
+                movieTitles.add(temp);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
+        return movieTitles;
+    }
+
+    public static ObservableList<Shows> readShowsOfMovie(String movieTitle) {
+
+        Connection connection = null;
+
+        Statement statement = null;
+        String sqlQuery = "SELECT * FROM Shows WHERE movie_Title = '" + movieTitle + "' ORDER BY Date;";
+
+        ResultSet resultSet = null;
+
+        ObservableList<Shows> shows = FXCollections.observableArrayList();
+
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while (resultSet.next()) {
+
+                String movieTitel = resultSet.getString("movie_Title");
+                int cinemaHall = resultSet.getInt("cinema_Hall");
+                String date = resultSet.getString("Date");
+                String time = resultSet.getString("Time");
+                int id = resultSet.getInt("shows_Id");
+
+
+                Shows tempShow = new Shows(movieTitel, cinemaHall, date, time, id);
+                shows.add(tempShow);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
+        return shows;
     }
 
     public static int getPriceFromMovie(String movieName){
@@ -214,28 +300,37 @@ public class DBController {
 
 
     //Checking login info from the DB
-    public static boolean loginCheck() {
+    public static boolean loginCheck(String tF,String pF) {
+
 
         Connection conn;
+        String Login_Name = "";
+        String Login_Password = "";
         boolean check = false;
+        String name = tF;
+        String password = pF;
+
 
         try {
             conn = DBConnection.getConnection();
 
             Statement mystate = conn.createStatement();
 
-            ResultSet rs = mystate.executeQuery("Select * Where "
-                    + "Login_name"
-                    + "="
-                    + LoginSalMainmenuController.username.getText());
+            ResultSet rs = mystate.executeQuery
+                    ("Select * FROM Login WHERE Login_name = '"+name+"'");
 
-            if (rs.next()) {
-               String Login_Name = rs.getString("Login_name");
-                System.out.println(Login_Name);
-                return true;
+
+            while(rs.next()) {
+                Login_Name = rs.getString("Login_name");
+                Login_Password = rs.getString("Login_pass");
+
+
+            }
+            if (name.equals(Login_Name)&& password.equals(Login_Password) ){
+                check= true;
 
             } else {
-                return false;
+                check = false;
             }
 
 
