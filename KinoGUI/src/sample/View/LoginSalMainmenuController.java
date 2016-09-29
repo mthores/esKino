@@ -1,6 +1,7 @@
 package sample.View;
 
 import javafx.animation.PauseTransition;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -10,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableRow;
@@ -21,13 +23,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import sample.Model.Shows;
+import sample.Model.Film;
 import sample.Presenter.DBController;
-
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
 
 
 //import java.io.IOException;
@@ -38,8 +43,8 @@ public class LoginSalMainmenuController {
 
     private static MouseEvent e;
     public static Stage mainStage;
-    @FXML public static TextField username;
-    @FXML public static PasswordField password;
+    //@FXML public static TextField username;
+    //@FXML public static PasswordField password;
 
     @FXML private Label infoLabelCinema;
     @FXML private Label ticketCount;
@@ -54,14 +59,19 @@ public class LoginSalMainmenuController {
 
     public void loginButtonClicked() throws IOException {
 
-        if(0 == 0) {
+        TextField tF = (TextField) mainStage.getScene().getRoot().lookup("#username");
+        TextField pF = (TextField) mainStage.getScene().getRoot().lookup("#password");
+        
+        if(true == DBController.loginCheck(tF.getText(),pF.getText())) {
             System.out.println("logged in succesfully!");
 
             toMenuButtonClicked();
 
 
         } else {
-            System.out.println("login failed. Bad credentials!");
+            tF.clear();
+            pF.clear();
+            System.out.println("login failed.");
         }
     }
 
@@ -164,15 +174,28 @@ public class LoginSalMainmenuController {
         Scene addMovieScene = new Scene(addMovieParent);
         mainStage.setScene(addMovieScene);
     }
+    public void redigereButtonClicked() throws IOException{
 
-    @FXML TableView <Object> tW2 = new TableView<>();
+        Parent editMovieParent = FXMLLoader.load(getClass().getResource("EditMovie.fxml"));
+        Scene editMovieScene = new Scene(editMovieParent);
+        mainStage.setScene(editMovieScene);
+    }
+    public void cancelButtonClicked() throws IOException{
+
+        Parent cancelParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
+        Scene cancelScene = new Scene(cancelParent);
+        mainStage.setScene(cancelScene);
+    }
+
+    @FXML TableView <Film> tW2 = new TableView<>();
+
 
     public void administrationButtonClicked() throws  IOException {
         Parent administrationParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
         Scene administrationScene = new Scene(administrationParent);
 
         tW2.setRowFactory(tW2 -> {
-            TableRow<Object> row = new TableRow<>();
+            TableRow<Film> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     Object rowData = row.getItem();
@@ -267,6 +290,69 @@ public class LoginSalMainmenuController {
         return dataListe;
     }
 
+
+
+    @FXML   private TableColumn<Film, String> TitelCol;
+    @FXML   private TableColumn<Film, Date> SidenCol;
+    @FXML   private TableColumn<Film, String> KategoriCol;
+    @FXML   private TableColumn<Film, String> SpilletidCol;
+    @FXML   private TableColumn<Film, String> RatingCol;
+    @FXML   private TableColumn<Film, Integer> SolgteCol;
+    public static ObservableList<Film> filmObservableList = FXCollections.observableArrayList();
+
+    public void refreshTableviewInFilm(){
+        DBController dbController = new DBController();
+        dbController.readInfoToFilm();
+
+        TitelCol.setCellValueFactory(new PropertyValueFactory<>("titel"));
+        SpilletidCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        KategoriCol.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        RatingCol.setCellValueFactory(new PropertyValueFactory<Film, String>("rating"));
+        SidenCol.setCellValueFactory(new PropertyValueFactory<Film, Date>("timestamp"));
+        SolgteCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("ticketSold"));
+
+        tW2.setItems(filmObservableList);
+
+    }
+
+    public void removeFilm(){
+        SimpleIntegerProperty index = new SimpleIntegerProperty();
+
+        DBController dbController = new DBController();
+
+        dbController.deletedFromFilm(tW2.getSelectionModel().getSelectedItem());
+        filmObservableList.remove(index.get());
+        tW2.getSelectionModel().clearSelection();
+    }
+
+    public void editButtonClicked2() {
+
+        try {
+            redigereButtonClicked();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
+        tW2.setRowFactory(tv -> {
+            TableRow tableRow = new TableRow();
+
+                    Film film = (Film) tW2.getSelectionModel().getSelectedItem();
+
+                    AddMovieController amc = new AddMovieController();
+
+                    amc.titelText.setText(film.getTitel());
+                    amc.descriptionArea.setText(film.getDescription());
+                    amc.durationText.setText(film.getDuration());
+                    amc.ticketPriceText.setText(Integer.toString(film.getTicketPrice()));
+                    amc.lincensPriceText.setText(Integer.toString(film.getLicensPrice()));
+                    amc.genreCombo.setValue(film.getGenre());
+                    amc.ratingCombo.setValue(film.getRating());
+
+            return tableRow;
+            });
+
+
+    }
 
 
 }

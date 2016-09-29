@@ -1,6 +1,7 @@
 package sample.View;
 
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -94,6 +95,8 @@ public class ShowManagementController{
         dbController.buildDataShowManagement(newShows);
 
         setDataToTableview();
+
+        clearFields();
     }
 
     @FXML
@@ -111,6 +114,25 @@ public class ShowManagementController{
 
     }
 
+    public void clearFields(){
+        selectMovieCombo.setValue("Select movie");
+        hallCheckbox1.setSelected(false);
+        hallCheckbox2.setSelected(false);
+        datepicker.setValue(null);
+        selectTimeCombo.setValue(null);
+    }
 
 
+    public void removeMovieFromTableView(){
+        SimpleIntegerProperty index2 = new SimpleIntegerProperty();
+
+        DBController dbController = new DBController();
+
+        dbController.deletedFromShowMangement(showTableView.getSelectionModel().getSelectedItem());
+        setDataToTableViewObservableList.remove(index2.get());
+        //showTableView.getSelectionModel().clearSelection();
+
+        setDataToTableview();
+
+    }
 }

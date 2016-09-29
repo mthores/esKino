@@ -3,22 +3,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sample.Model.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 import sample.Model.Film;
 import sample.View.LoginSalMainmenuController;
 import sample.View.ShowManagementController;
 
-import java.sql.ResultSet;
-
 import javafx.scene.shape.Rectangle;
+import sun.rmi.runtime.Log;
 
 import java.util.ArrayList;
 
 public class DBController {
+
+
 
 
     public static ArrayList readShowToSeats(int showId) {
@@ -302,28 +300,37 @@ public class DBController {
 
 
     //Checking login info from the DB
-    public static boolean loginCheck() {
+    public static boolean loginCheck(String tF,String pF) {
+
 
         Connection conn;
+        String Login_Name = "";
+        String Login_Password = "";
         boolean check = false;
+        String name = tF;
+        String password = pF;
+
 
         try {
             conn = DBConnection.getConnection();
 
             Statement mystate = conn.createStatement();
 
-            ResultSet rs = mystate.executeQuery("Select * Where "
-                    + "Login_name"
-                    + "="
-                    + LoginSalMainmenuController.username.getText());
+            ResultSet rs = mystate.executeQuery
+                    ("Select * FROM Login WHERE Login_name = '"+name+"'");
 
-            if (rs.next()) {
-               String Login_Name = rs.getString("Login_name");
-                System.out.println(Login_Name);
-                return true;
+
+            while(rs.next()) {
+                Login_Name = rs.getString("Login_name");
+                Login_Password = rs.getString("Login_pass");
+
+
+            }
+            if (name.equals(Login_Name)&& password.equals(Login_Password) ){
+                check= true;
 
             } else {
-                return false;
+                check = false;
             }
 
 
@@ -335,5 +342,116 @@ public class DBController {
 
     }
 
+<<<<<<< HEAD
+=======
+    public void readInfoToFilm(){
+
+
+        Connection conn;
+
+        LoginSalMainmenuController.filmObservableList.clear();
+
+        try{
+            conn = DBConnection.getConnection();
+            String sql = "Select Film_title, Duration,Genre, Rating, Tickets_sold, Timestamp from Film";
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+
+            while (rs.next()){
+                LoginSalMainmenuController.filmObservableList.add(new Film(
+                rs.getString("Film_title"),
+                rs.getString("Duration"),
+                rs.getString("Genre"),
+                rs.getString("Rating"),
+                rs.getInt("Tickets_Sold"),
+                rs.getDate("Timestamp")));
+            }
+            rs.close();
+            conn.close();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void buildDataFilm(Film film) {
+
+        Connection conn;
+        PreparedStatement ps;
+        String sql = "Insert Into Film (Film_title, Description, Ticket_price, Duration, Genre, Rating, License_price, Timestamp) Values (?, ?, ?, ?, ?, ?, ?, CURRENT_DATE)";
+
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, film.getTitel());
+            ps.setString(2, film.getDescription());
+            ps.setInt(3, film.getTicketPrice());
+            ps.setString(4, film.getDuration());
+            ps.setString(5, film.getGenre());
+            ps.setString(6, film.getRating());
+            ps.setInt(7, film.getLicensPrice());
+
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deletedFromFilm(Object film){
+        Film selectedFilm = (Film) film;
+
+        Connection conn;
+        PreparedStatement pre;
+        String sql = "Delete from Film where Film_title = ?";
+
+        try{
+            conn = DBConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+
+            pre.setString(1,selectedFilm.getTitel());
+
+            pre.execute();
+            pre.close();
+            conn.close();
+
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+    public void deletedFromShowMangement (Object show){
+        Shows selectedMovie = (Shows) show;
+
+        Connection conn;
+        PreparedStatement pre;
+        String sql = "Delete from Shows where movie_Title = ? AND cinema_hall = ? AND Date = ? AND Time = ?";
+
+        try{
+            conn = DBConnection.getConnection();
+            pre = conn.prepareStatement(sql);
+
+            pre.setString(1,selectedMovie.getMovieTitel());
+            pre.setInt(2, selectedMovie.getCinemaHall());
+            pre.setDate(3, Date.valueOf(selectedMovie.getDate()));
+            pre.setString(4,selectedMovie.getTime());
+
+            pre.execute();
+            pre.close();
+            conn.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+>>>>>>> 1cf151f714d89fe4c8933c5fab353d8d87bac1ff
 
 }
