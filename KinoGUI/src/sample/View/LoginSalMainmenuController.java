@@ -1,10 +1,7 @@
 package sample.View;
 
-<<<<<<< HEAD
 import javafx.animation.PauseTransition;
-=======
 import javafx.collections.ObservableList;
->>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
