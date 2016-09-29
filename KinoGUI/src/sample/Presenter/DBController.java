@@ -1,4 +1,6 @@
 package sample.Presenter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import sample.Model.*;
 
 import java.sql.Connection;
@@ -17,6 +19,8 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 
 public class DBController {
+
+
 
 
     public static ArrayList readShowToSeats(int showId) {
@@ -245,6 +249,36 @@ public class DBController {
 
         }
         return check;
+
+    }
+
+    public void readInfoToFilm(){
+
+
+        Connection conn;
+
+        try{
+            conn = DBConnection.getConnection();
+            String sql = "Select Film_title, Duration,Genre, Rating, Tickets_sold, Timestamp from Film";
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+
+            while (rs.next()){
+                LoginSalMainmenuController.filmObservableList.add(new Film(
+                rs.getString("Film_title"),
+                rs.getString("Duration"),
+                rs.getString("Genre"),
+                rs.getString("Rating"),
+                rs.getInt("Tickets_Sold"),
+                rs.getDate("Timestamp")));
+            }
+            rs.close();
+            conn.close();
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
     }
 

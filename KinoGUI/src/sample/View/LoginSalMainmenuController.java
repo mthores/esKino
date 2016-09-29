@@ -1,6 +1,7 @@
 package sample.View;
 
 import javafx.animation.PauseTransition;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableRow;
@@ -21,10 +23,13 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sample.Model.Film;
 import sample.Presenter.DBController;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
 
 
 //import java.io.IOException;
@@ -111,14 +116,18 @@ public class LoginSalMainmenuController {
         mainStage.setScene(addMovieScene);
     }
 
+<<<<<<< HEAD
     @FXML TableView <Object> tW2 = new TableView<>();
+=======
+    @FXML TableView <Film> tW2 = new TableView<>();
 
+>>>>>>> 7a9ca29c2601f2cd81d48f93b4e6c32ae49a7f3c
     public void administrationButtonClicked() throws  IOException {
         Parent administrationParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
         Scene administrationScene = new Scene(administrationParent);
 
         tW2.setRowFactory(tW2 -> {
-            TableRow<Object> row = new TableRow<>();
+            TableRow<Film> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     Object rowData = row.getItem();
@@ -191,6 +200,30 @@ public class LoginSalMainmenuController {
                 }
             }
         }
+    }
+
+
+    @FXML   private TableColumn<Film, String> TitelCol;
+    @FXML   private TableColumn<Film, Date> SidenCol;
+    @FXML   private TableColumn<Film, String> KategoriCol;
+    @FXML   private TableColumn<Film, String> SpilletidCol;
+    @FXML   private TableColumn<Film, String> RatingCol;
+    @FXML   private TableColumn<Film, Integer> SolgteCol;
+    public static ObservableList<Film> filmObservableList = FXCollections.observableArrayList();
+
+    public void refreshTableviewInFilm(){
+        DBController dbController = new DBController();
+        dbController.readInfoToFilm();
+
+        TitelCol.setCellValueFactory(new PropertyValueFactory<>("titel"));
+        SpilletidCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        KategoriCol.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        RatingCol.setCellValueFactory(new PropertyValueFactory<Film, String>("rating"));
+        SidenCol.setCellValueFactory(new PropertyValueFactory<Film, Date>("timestamp"));
+        SolgteCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("ticketSold"));
+
+        tW2.setItems(filmObservableList);
+
     }
 
 
