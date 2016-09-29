@@ -17,7 +17,7 @@
    <children>
       <Button fx:id="addMovieButton" layoutX="1079.0" layoutY="729.0" mnemonicParsing="false" onAction="#addMovieAction" text="Add Movie" />
       <Button fx:id="backButtion" layoutX="56.0" layoutY="729.0" mnemonicParsing="false" onAction="#toFilmButtonClicked" text="Back" />
-      <Label fx:id="MainTitelLabel" layoutX="493.0" layoutY="38.0" text="Add Movie">
+      <Label fx:id="MainTitelLabel" layoutX="457.0" layoutY="39.0" text="Add Movie">
          <font>
             <Font size="61.0" />
          </font>
@@ -30,7 +30,7 @@
       <TextField fx:id="durationText" layoutX="151.0" layoutY="250.0" promptText="Duration" />
       <TextField fx:id="ticketPriceText" layoutX="151.0" layoutY="290.0" promptText="Ticket Price" />
       <TextField fx:id="lincensPriceText" layoutX="151.0" layoutY="330.0" promptText="Licens Price" />
-      <TextArea fx:id="descriptionArea" layoutX="409.0" layoutY="210.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="193.0" prefWidth="356.0" promptText="Description of the Movie" />
+      <TextArea fx:id="descriptionArea" layoutX="426.0" layoutY="219.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="193.0" prefWidth="356.0" promptText="Description of the Movie" />
       <ComboBox fx:id="genreCombo" layoutX="151.0" layoutY="371.0" promptText="Genre">
          <items>
                  <FXCollections fx:factory="observableArrayList">
@@ -72,7 +72,7 @@
       <Label layoutX="56.0" layoutY="254.0" text="Duration" />
       <Label layoutX="54.0" layoutY="294.0" text="Ticket Price" />
       <Label layoutX="54.0" layoutY="334.0" text="Licens Price" />
-      <Label layoutX="522.0" layoutY="183.0" text="Description of the movie" />
+      <Label layoutX="523.0" layoutY="189.0" text="Description of the movie" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="150.0" layoutX="919.0" layoutY="210.0" stroke="BLACK" strokeType="INSIDE" width="188.0" />
    </children>
 </AnchorPane>
