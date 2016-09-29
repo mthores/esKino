@@ -266,6 +266,8 @@ public class DBController {
 
         Connection conn;
 
+        LoginSalMainmenuController.filmObservableList.clear();
+
         try{
             conn = DBConnection.getConnection();
             String sql = "Select Film_title, Duration,Genre, Rating, Tickets_sold, Timestamp from Film";
@@ -287,8 +289,33 @@ public class DBController {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
 
+    public void buildDataFilm(Film film) {
 
+        Connection conn;
+        PreparedStatement ps;
+        String sql = "Insert Into Film (Film_title, Description, Ticket_price, Duration, Genre, Rating, License_price, Timestamp) Values (?, ?, ?, ?, ?, ?, ?, CURRENT_DATE)";
+
+        try {
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
+
+            ps.setString(1, film.getTitel());
+            ps.setString(2, film.getDescription());
+            ps.setInt(3, film.getTicketPrice());
+            ps.setString(4, film.getDuration());
+            ps.setString(5, film.getGenre());
+            ps.setString(6, film.getRating());
+            ps.setInt(7, film.getLicensPrice());
+
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

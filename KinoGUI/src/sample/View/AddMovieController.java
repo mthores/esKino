@@ -14,14 +14,19 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import sample.Model.Film;
+import sample.Presenter.DBController;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 
 public class AddMovieController {
 
     //This scenes controls the AddMovieController scene
 
+    DBController dbController = new DBController();
 
     @FXML private Label savedLabel;
     @FXML public TextField titelText;
@@ -68,5 +73,25 @@ public class AddMovieController {
         genreCombo.setValue("Genre");
         ratingCombo.setValue("Rating");
     }
+
+    public void saveFilmToDB(){
+
+        String titel = titelText.getText();
+        String description = descriptionArea.getText();
+        int ticketPrice = Integer.parseInt(ticketPriceText.getText());
+        String duration = durationText.getText();
+        String genre = genreCombo.getSelectionModel().getSelectedItem().toString();
+        String rating = ratingCombo.getSelectionModel().getSelectedItem().toString();
+        int licensPrice = Integer.parseInt(lincensPriceText.getText());
+
+        Film newFilm = new Film(titel, description, ticketPrice, duration, genre, rating, licensPrice);
+
+        dbController.buildDataFilm(newFilm);
+
+        addMovieAction();
+
+    }
+
+
 
 }
