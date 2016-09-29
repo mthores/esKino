@@ -70,7 +70,7 @@ public class Film {
         this.genre = new SimpleStringProperty (genre);
         this.rating = new SimpleStringProperty (rating);
         this.ticketSold = new SimpleIntegerProperty(ticketSold);
-        this.timestamp = Date.from(Instant.now());
+        this.timestamp = timestamp;
     }
 
     public Film(String titel) {
