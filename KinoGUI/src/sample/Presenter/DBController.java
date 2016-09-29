@@ -342,8 +342,6 @@ public class DBController {
 
     }
 
-<<<<<<< HEAD
-=======
     public void readInfoToFilm(){
 
 
@@ -452,6 +450,5 @@ public class DBController {
 
     }
 
->>>>>>> 1cf151f714d89fe4c8933c5fab353d8d87bac1ff
 
 }
