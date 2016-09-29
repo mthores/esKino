@@ -1,6 +1,10 @@
 package sample.View;
 
+<<<<<<< HEAD
+import javafx.animation.PauseTransition;
+=======
 import javafx.collections.ObservableList;
+>>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -19,7 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import org.w3c.dom.css.Rect;
+import javafx.util.Duration;
 import sample.Presenter.DBController;
 
 import java.io.*;
@@ -30,10 +34,18 @@ import java.util.ArrayList;
 
 public class LoginSalMainmenuController {
 
+    ShowManagementController showManagementController = new ShowManagementController();
+
     private static MouseEvent e;
+<<<<<<< HEAD
     private static Stage mainStage;
+    @FXML public static TextField username;
+    @FXML public static PasswordField password;
+=======
+    public static Stage mainStage;
     @FXML private TextField username;
     @FXML private PasswordField password;
+>>>>>>> 226421eb40c43430c9805436fb7f04acf357623a
 
     @FXML private Label infoLabelCinema;
     @FXML private Label ticketCount;
@@ -48,7 +60,7 @@ public class LoginSalMainmenuController {
 
     public void loginButtonClicked() throws IOException {
 
-        if(username.getText().equals("admin") && password.getText().equals("admin")) {
+        if(true == DBController.loginCheck()) {
             System.out.println("logged in succesfully!");
 
             toMenuButtonClicked();
@@ -92,6 +104,20 @@ public class LoginSalMainmenuController {
         System.out.println(ticketPrice +" 1");
         updateSeatColors(seatList);
 
+    }
+
+    public void toShowManagementButtonClicked() throws IOException {
+
+        Parent showParent = FXMLLoader.load(getClass().getResource("ShowMangement.fxml"));
+        Scene showScene = new Scene(showParent);
+        mainStage.setScene(showScene);
+    }
+
+    public void addMovieMenuClicked() throws IOException {
+
+        Parent addMovieParent = FXMLLoader.load(getClass().getResource("addMovie.fxml"));
+        Scene addMovieScene = new Scene(addMovieParent);
+        mainStage.setScene(addMovieScene);
     }
 
     @FXML TableView <Object> tW2 = new TableView<>();
