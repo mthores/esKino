@@ -1,4 +1,6 @@
 package sample.Presenter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import sample.Model.*;
 
 import java.sql.Connection;
@@ -46,8 +48,6 @@ public class DBController {
 
             }
 
-            System.out.println("success");
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -61,6 +61,93 @@ public class DBController {
             }
         }
         return seats;
+    }
+
+    public static ObservableList<String> readMovieTitles() {
+
+        Connection connection = null;
+
+        Statement statement = null;
+        String sqlQuery = "SELECT Film_title FROM Film;";
+
+        ResultSet resultSet = null;
+
+        ObservableList<String> movieTitles = FXCollections.observableArrayList();
+
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while (resultSet.next()) {
+
+                String temp = resultSet.getString("Film_title");
+                movieTitles.add(temp);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
+        return movieTitles;
+    }
+
+    public static ObservableList<Shows> readShowsOfMovie(String movieTitle) {
+
+        Connection connection = null;
+
+        Statement statement = null;
+        String sqlQuery = "SELECT * FROM Shows WHERE movie_Title = '" + movieTitle + "' ORDER BY Date;";
+
+        ResultSet resultSet = null;
+
+        ObservableList<Shows> shows = FXCollections.observableArrayList();
+
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while (resultSet.next()) {
+
+                String movieTitel = resultSet.getString("movie_Title");
+                int cinemaHall = resultSet.getInt("cinema_Hall");
+                String date = resultSet.getString("Date");
+                String time = resultSet.getString("Time");
+                int id = resultSet.getInt("shows_Id");
+
+
+                Shows tempShow = new Shows(movieTitel, cinemaHall, date, time, id);
+                shows.add(tempShow);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
+        return shows;
     }
 
     public static int getPriceFromMovie(String movieName){
@@ -247,5 +334,6 @@ public class DBController {
         return check;
 
     }
+
 
 }
