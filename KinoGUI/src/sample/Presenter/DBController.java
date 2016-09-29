@@ -1,23 +1,108 @@
 package sample.Presenter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import sample.Model.*;
-import sample.Presenter.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-import javafx.collections.ObservableList;
 import sample.Model.Film;
+import sample.View.LoginSalMainmenuController;
 import sample.View.ShowManagementController;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
+
+import javafx.scene.shape.Rectangle;
+
+import java.util.ArrayList;
 
 public class DBController {
 
-<<<<<<< HEAD
+
+
+
+    public static ArrayList readShowToSeats(int showId) {
+
+        Connection connection = null;
+
+        Statement statement = null;
+        String sqlQuery = "SELECT * FROM Reservation WHERE shows_Id = '" + showId + "';";
+
+        ResultSet resultSet = null;
+
+        ArrayList<Rectangle> seats = new ArrayList();
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while (resultSet.next()) {
+
+                String temp = resultSet.getString("seat_Id");
+                Rectangle getRect = new Rectangle();
+                getRect.setId(temp);
+
+                seats.add(getRect);
+
+            }
+
+            System.out.println("success");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+
+                }
+            }
+        }
+        return seats;
+    }
+
+    public static int getPriceFromMovie(String movieName){
+
+        Connection connection = null;
+
+        Statement statement = null;
+        String sqlQuery = "SELECT Ticket_price FROM Film WHERE Film_title = '"+movieName+"';";
+        int price = 0;
+
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while(resultSet.next()){
+
+                price = resultSet.getInt("Ticket_price");
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return price;
+    }
+
     public static void writeReservations(Shows show, Customer customer, String seat_id) {
         try {
             String sqlString = "INSERT INTO Reservation (reservation_id, Film_title, Customer_id, shows_id, seat_id)" +
@@ -30,55 +115,171 @@ public class DBController {
             prepared.setInt(4, show.getID());
             prepared.setString(5, seat_id);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
         }
 
-    }
+        public static void updateSoldTickets(Film film, int tickets) {
 
-    public static void updateSoldTickets(Film film, int tickets) {
+            try {
+                Statement statement = DBConnection.getConnection().createStatement();
+
+                String sqlString = "UPDATE sql7137771.Film SET Tickets_Sold = " +
+                        tickets + " WHERE Film_title = " + film.getTitel() + ";";
+
+                statement.executeUpdate(sqlString);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        //gets movies from db and adds to show management
+        public void getMovieFromDB() {
+            Connection conn;
+
+            try {
+                conn = DBConnection.getConnection();
+                String sql = "Select Film_title from Film";
+                ResultSet rsl = conn.createStatement().executeQuery(sql);
+
+                ShowManagementController.setDataToComboxObservableList.clear();
+
+                while (rsl.next()) {
+                    ShowManagementController.setDataToComboxObservableList.add(new Film(
+                            rsl.getString("Film_title")
+                    ));
+                }
+                rsl.close();
+                conn.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    //gets movies from db and adds to show management
+
+    public void buildDataShowManagement(Shows shows) {
+
+        Connection conn;
+        PreparedStatement ps;
+        String sql = "Insert Into Shows (shows_Id, movie_Title, cinema_Hall, Date, Time) Values (default, ?, ?, ?, ?)";
 
         try {
-            Statement statement = DBConnection.getConnection().createStatement();
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(sql);
 
-            String sqlString = "UPDATE sql7137771.Film SET Tickets_Sold = " +
-                    tickets + " WHERE Film_title = " + film.getTitel() + ";";
+            ps.setString(1, shows.getMovieTitel());
+            ps.setInt(2, shows.getCinemaHall());
+            ps.setString(3, shows.getDate());
+            ps.setString(4, shows.getTime());
 
-            statement.executeUpdate(sqlString);
+            ps.executeUpdate();
+            ps.close();
+            conn.close();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void refreshTableview(){
+
+        Connection conn;
+
+        try{
+
+            conn = DBConnection.getConnection();
+            String sql = "Select movie_Title, cinema_Hall, Date, Time From Shows";
+            ResultSet rs = conn.createStatement().executeQuery(sql);
+            //deletes old data and gets fresh data from db
+            ShowManagementController.setDataToTableViewObservableList.clear();
+
+            //set all the data from db into an ObservableList
+            while(rs.next()){
+                ShowManagementController.setDataToTableViewObservableList.add(new Shows(
+                rs.getString("movie_Title"),
+                rs.getInt("cinema_Hall"),
+                rs.getString("Date"),
+                rs.getString("Time")
+                ));
+            }
+            rs.close();
+            conn.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    //Checking login info from the DB
+    public static boolean loginCheck() {
+
+        Connection conn;
+        boolean check = false;
+
+        try {
+            conn = DBConnection.getConnection();
+
+            Statement mystate = conn.createStatement();
+
+            ResultSet rs = mystate.executeQuery("Select * Where "
+                    + "Login_name"
+                    + "="
+                    + LoginSalMainmenuController.username.getText());
+
+            if (rs.next()) {
+               String Login_Name = rs.getString("Login_name");
+                System.out.println(Login_Name);
+                return true;
+
+            } else {
+                return false;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return check;
 
     }
-=======
-    //gets movies from db and adds to show management
-    public void getMovieFromDB(){
+
+    public void readInfoToFilm(){
+
+
         Connection conn;
 
         try{
             conn = DBConnection.getConnection();
-            String sql = "Select Film_title from Film";
-            ResultSet rsl = conn.createStatement().executeQuery(sql);
+            String sql = "Select Film_title, Duration,Genre, Rating, Tickets_sold, Timestamp from Film";
+            ResultSet rs = conn.createStatement().executeQuery(sql);
 
-            ShowManagementController.setDataToComboxObservableList.clear();
-
-            while(rsl.next()){
-                ShowManagementController.setDataToComboxObservableList.add(new Film(
-                        rsl.getString("Film_title")
-                ));
+            while (rs.next()){
+                LoginSalMainmenuController.filmObservableList.add(new Film(
+                rs.getString("Film_title"),
+                rs.getString("Duration"),
+                rs.getString("Genre"),
+                rs.getString("Rating"),
+                rs.getInt("Tickets_Sold"),
+                rs.getDate("Timestamp")));
             }
-            rsl.close();
+            rs.close();
             conn.close();
 
-        }catch(Exception e){
+
+        }catch (Exception e){
             e.printStackTrace();
         }
+
+
     }
 
-
-
-
-
->>>>>>> 794dbc554e114132f402a045284c0dcbe5a697be
 }

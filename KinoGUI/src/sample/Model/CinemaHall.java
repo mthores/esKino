@@ -3,9 +3,6 @@ package sample.Model;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-/**
- * Created by Søren on 26-09-2016.
- */
 public class CinemaHall {
 
     private SimpleIntegerProperty hallNumber;

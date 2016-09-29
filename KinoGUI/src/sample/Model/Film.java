@@ -3,6 +3,11 @@ package sample.Model;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
+
 public class Film {
 
     private SimpleIntegerProperty id;
@@ -15,6 +20,7 @@ public class Film {
     private SimpleIntegerProperty licensPrice;
     private SimpleIntegerProperty ticketSold;
     private SimpleIntegerProperty hall;
+    private Date timestamp;
 
 
     //contructor
@@ -31,6 +37,18 @@ public class Film {
         this.ticketSold = new SimpleIntegerProperty(ticketSold);
         this.hall = new SimpleIntegerProperty(hall);
         this.id = new SimpleIntegerProperty(id);
+    }
+
+
+
+
+    public Film(String titel, String duration, String genre, String rating, int ticketSold, Date timestamp){
+        this.titel = new SimpleStringProperty(titel);
+        this.duration = new SimpleStringProperty (duration);
+        this.genre = new SimpleStringProperty (genre);
+        this.rating = new SimpleStringProperty (rating);
+        this.ticketSold = new SimpleIntegerProperty(ticketSold);
+        this.timestamp = Date.from(Instant.now());
     }
 
     public Film(String titel) {
@@ -146,13 +164,33 @@ public class Film {
         this.hall.set(hall);
     }
 
-<<<<<<< HEAD
+
     public  int getID() {
         return id.get();
-=======
+    }
+
     //work with titel!!!!
-    public String toString(){
+    public String toString() {
         return getTitel();
->>>>>>> 794dbc554e114132f402a045284c0dcbe5a697be
+    }
+
+    public int getId() {
+        return id.get();
+    }
+
+    public SimpleIntegerProperty idProperty() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Date timestamp) {
+        this.timestamp = timestamp;
     }
 }

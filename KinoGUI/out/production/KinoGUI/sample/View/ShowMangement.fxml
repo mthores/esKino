@@ -50,6 +50,6 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="savedshowButton" layoutX="279.0" layoutY="478.0" mnemonicParsing="false" text="Save show" />
+      <Button fx:id="savedshowButton" layoutX="279.0" layoutY="478.0" mnemonicParsing="false" onAction="#setDataToTableview" text="Save show" />
    </children>
 </AnchorPane>

@@ -1,49 +1,54 @@
 package sample.View;
 
+import javafx.animation.PauseTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableRow;
 
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import sample.Model.Film;
+import sample.Presenter.DBController;
+
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
 
 
 //import java.io.IOException;
 
 public class LoginSalMainmenuController {
 
+    ShowManagementController showManagementController = new ShowManagementController();
+
     private static MouseEvent e;
-    private static Stage mainStage;
-    @FXML private TextField username;
-    @FXML private PasswordField password;
+    public static Stage mainStage;
+    @FXML public static TextField username;
+    @FXML public static PasswordField password;
 
     @FXML private Label infoLabelCinema;
     @FXML private Label ticketCount;
     @FXML private Label totalPrice;
     private int tC;
+    private int ticketPrice;
 
-    @FXML private Rectangle s11;
-    @FXML private Rectangle s12;
-    @FXML private Rectangle s13;
-    @FXML private Rectangle s14;
-    @FXML private Rectangle s15;
-    @FXML private Rectangle s16;
-    @FXML private Rectangle s17;
-    @FXML private Rectangle s18;
-    @FXML private Rectangle s19;
-    @FXML private Rectangle s110;
-    @FXML private Rectangle s111;
-    @FXML private Rectangle s112;
 
     public static void initializeController(Stage stage){
         mainStage = stage;
@@ -51,7 +56,7 @@ public class LoginSalMainmenuController {
 
     public void loginButtonClicked() throws IOException {
 
-        if(username.getText().equals("admin") && password.getText().equals("admin")) {
+        if(true == DBController.loginCheck()) {
             System.out.println("logged in succesfully!");
 
             toMenuButtonClicked();
@@ -88,15 +93,41 @@ public class LoginSalMainmenuController {
         Parent cinemaParent = FXMLLoader.load(getClass().getResource("sal.fxml"));
         Scene cinemaScene = new Scene(cinemaParent);
         mainStage.setScene(cinemaScene);
+
+        HBox seatBox = (HBox) cinemaParent.getScene().getRoot().lookup("#seatBox");
+        ObservableList<Node> seatList = seatBox.getChildren();
+        ticketPrice = DBController.getPriceFromMovie("Pochahotass");
+        System.out.println(ticketPrice +" 1");
+        updateSeatColors(seatList);
+
     }
 
+    public void toShowManagementButtonClicked() throws IOException {
+
+        Parent showParent = FXMLLoader.load(getClass().getResource("ShowMangement.fxml"));
+        Scene showScene = new Scene(showParent);
+        mainStage.setScene(showScene);
+    }
+
+    public void addMovieMenuClicked() throws IOException {
+
+        Parent addMovieParent = FXMLLoader.load(getClass().getResource("addMovie.fxml"));
+        Scene addMovieScene = new Scene(addMovieParent);
+        mainStage.setScene(addMovieScene);
+    }
+
+<<<<<<< HEAD
     @FXML TableView <Object> tW2 = new TableView<>();
+=======
+    @FXML TableView <Film> tW2 = new TableView<>();
+
+>>>>>>> 7a9ca29c2601f2cd81d48f93b4e6c32ae49a7f3c
     public void administrationButtonClicked() throws  IOException {
         Parent administrationParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
         Scene administrationScene = new Scene(administrationParent);
 
         tW2.setRowFactory(tW2 -> {
-            TableRow<Object> row = new TableRow<>();
+            TableRow<Film> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     Object rowData = row.getItem();
@@ -146,11 +177,54 @@ public class LoginSalMainmenuController {
                 tC--;
             }
 
-            updateTicketCounters();
+            updateTicketCounters(ticketPrice);
         }
 
-    public void updateTicketCounters(){
+    public void updateTicketCounters(int ticketPrice){
+
         ticketCount.setText(""+tC);
-        totalPrice.setText(""+tC*85+" Kroner");
+        totalPrice.setText(""+tC*ticketPrice+" Kroner");
     }
+
+    public void updateSeatColors(ObservableList<Node> seatList){
+
+        ArrayList<Rectangle> reservedSeats = DBController.readShowToSeats(1);
+
+        for (Rectangle rSeat: reservedSeats ){
+
+            for (Node seat: seatList ){
+
+                if(rSeat.getId().equals(seat.getId())){
+                    Rectangle redSeat = (Rectangle) seat;
+                    redSeat.setFill(Color.RED);
+                }
+            }
+        }
+    }
+
+
+    @FXML   private TableColumn<Film, String> TitelCol;
+    @FXML   private TableColumn<Film, Date> SidenCol;
+    @FXML   private TableColumn<Film, String> KategoriCol;
+    @FXML   private TableColumn<Film, String> SpilletidCol;
+    @FXML   private TableColumn<Film, String> RatingCol;
+    @FXML   private TableColumn<Film, Integer> SolgteCol;
+    public static ObservableList<Film> filmObservableList = FXCollections.observableArrayList();
+
+    public void refreshTableviewInFilm(){
+        DBController dbController = new DBController();
+        dbController.readInfoToFilm();
+
+        TitelCol.setCellValueFactory(new PropertyValueFactory<>("titel"));
+        SpilletidCol.setCellValueFactory(new PropertyValueFactory<>("duration"));
+        KategoriCol.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        RatingCol.setCellValueFactory(new PropertyValueFactory<Film, String>("rating"));
+        SidenCol.setCellValueFactory(new PropertyValueFactory<Film, Date>("timestamp"));
+        SolgteCol.setCellValueFactory(new PropertyValueFactory<Film, Integer>("ticketSold"));
+
+        tW2.setItems(filmObservableList);
+
+    }
+
+
 }
