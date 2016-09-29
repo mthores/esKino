@@ -5,6 +5,9 @@ import javafx.animation.PauseTransition;
 
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -12,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.io.IOException;
 
 
 public class AddMovieController {
@@ -29,6 +33,13 @@ public class AddMovieController {
     @FXML public ComboBox genreCombo;
     @FXML public ComboBox ratingCombo;
 
+
+    public void toFilmButtonClicked() throws IOException {
+
+        Parent filmParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
+        Scene showScene = new Scene(filmParent);
+        LoginSalMainmenuController.mainStage.setScene(showScene);
+    }
 
 
     public void addMovieAction(){

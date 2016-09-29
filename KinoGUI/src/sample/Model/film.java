@@ -146,13 +146,13 @@ public class Film {
         this.hall.set(hall);
     }
 
-<<<<<<< HEAD
+
     public  int getID() {
         return id.get();
-=======
+    }
     //work with titel!!!!
     public String toString(){
         return getTitel();
->>>>>>> 794dbc554e114132f402a045284c0dcbe5a697be
+
     }
 }

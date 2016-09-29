@@ -12,8 +12,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.ShowManagementController">
    <children>
-      <Button fx:id="showRemoveButton" layoutX="1062.0" layoutY="695.0" mnemonicParsing="false" text="Remove selected show" />
-      <Button fx:id="showMbackButton" layoutX="77.0" layoutY="695.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="showRemoveButton" layoutX="1026.0" layoutY="695.0" mnemonicParsing="false" text="Remove selected show" />
+      <Button fx:id="showMbackButton" layoutX="77.0" layoutY="695.0" mnemonicParsing="false" onAction="#toFilmButtonClicked" text="Back" />
       <CheckBox fx:id="hallCheckbox1" layoutX="105.0" layoutY="235.0" mnemonicParsing="false" onAction="#selectedCheckbox" text="Hall 1" />
       <CheckBox fx:id="hallCheckbox2" layoutX="105.0" layoutY="265.0" mnemonicParsing="false" onAction="#selectedCheckbox" text="Hall 2" />
       <ComboBox fx:id="selectTimeCombo" layoutX="105.0" layoutY="365.0" prefWidth="150.0" promptText="Select time">
@@ -50,6 +50,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button fx:id="savedshowButton" layoutX="279.0" layoutY="478.0" mnemonicParsing="false" onAction="#setDataToTableview" text="Save show" />
+      <Button fx:id="savedshowButton" layoutX="279.0" layoutY="478.0" mnemonicParsing="false" onAction="#savedataToDB" text="Save show" />
+      <Button fx:id="refreshButton" layoutX="730.0" layoutY="695.0" mnemonicParsing="false" onAction="#setDataToTableview" text="Refresh" />
    </children>
 </AnchorPane>

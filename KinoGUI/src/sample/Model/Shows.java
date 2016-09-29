@@ -24,6 +24,14 @@ public class Shows {
         this.id = new SimpleIntegerProperty(id);
     }
 
+    //constructor
+    public Shows(String movieTitel, int cinemaHall, String date, String time) {
+        this.movieTitel = new SimpleStringProperty(movieTitel);
+        this.cinemaHall = new SimpleIntegerProperty(cinemaHall);
+        this.date = new SimpleStringProperty(date);
+        this.time = new SimpleStringProperty(time);
+    }
+
     //getter & setter
     public String getMovieTitel() {
         return movieTitel.get();

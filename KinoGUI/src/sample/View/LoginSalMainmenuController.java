@@ -1,5 +1,6 @@
 package sample.View;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import org.w3c.dom.css.Rect;
+import javafx.util.Duration;
 import sample.Presenter.DBController;
 
 import java.io.*;
@@ -26,8 +27,10 @@ import java.util.ArrayList;
 
 public class LoginSalMainmenuController {
 
+    ShowManagementController showManagementController = new ShowManagementController();
+
     private static MouseEvent e;
-    private static Stage mainStage;
+    public static Stage mainStage;
     @FXML private TextField username;
     @FXML private PasswordField password;
 
@@ -97,6 +100,20 @@ public class LoginSalMainmenuController {
         Parent cinemaParent = FXMLLoader.load(getClass().getResource("sal.fxml"));
         Scene cinemaScene = new Scene(cinemaParent);
         mainStage.setScene(cinemaScene);
+    }
+
+    public void toShowManagementButtonClicked() throws IOException {
+
+        Parent showParent = FXMLLoader.load(getClass().getResource("ShowMangement.fxml"));
+        Scene showScene = new Scene(showParent);
+        mainStage.setScene(showScene);
+    }
+
+    public void addMovieMenuClicked() throws IOException {
+
+        Parent addMovieParent = FXMLLoader.load(getClass().getResource("addMovie.fxml"));
+        Scene addMovieScene = new Scene(addMovieParent);
+        mainStage.setScene(addMovieScene);
     }
 
     @FXML TableView <Object> tW2 = new TableView<>();
