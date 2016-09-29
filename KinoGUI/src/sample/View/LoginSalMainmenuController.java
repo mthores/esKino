@@ -1,7 +1,9 @@
 package sample.View;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -37,21 +39,6 @@ public class LoginSalMainmenuController {
     @FXML private Label ticketCount;
     @FXML private Label totalPrice;
     private int tC;
-
-    @FXML private Rectangle s1a1;
-    @FXML private Rectangle s1a2;
-    @FXML private Rectangle s1a3;
-    @FXML private Rectangle s1a4;
-    @FXML private Rectangle s1a5;
-    @FXML private Rectangle s1a6;
-    @FXML private Rectangle s1a7;
-    @FXML private Rectangle s1a8;
-    @FXML private Rectangle s1a9;
-    @FXML private Rectangle s1a10;
-    @FXML private Rectangle s1a11;
-    @FXML private Rectangle s1a12;
-
-
 
 
     public static void initializeController(Stage stage){
@@ -94,13 +81,14 @@ public class LoginSalMainmenuController {
 
     public void reserveButtonClicked() throws IOException {
 
-        updateSeatColors();
-
         Parent cinemaParent = FXMLLoader.load(getClass().getResource("sal.fxml"));
         Scene cinemaScene = new Scene(cinemaParent);
         mainStage.setScene(cinemaScene);
+
         HBox seatBox = (HBox) cinemaParent.getScene().getRoot().lookup("#seatBox");
-        System.out.println(seatBox);
+        ObservableList<Node> seatList = seatBox.getChildren();
+        updateSeatColors(seatList);
+
         System.out.println("Hello");
 
     }
@@ -170,47 +158,21 @@ public class LoginSalMainmenuController {
         totalPrice.setText(""+tC*85+" Kroner");
     }
 
-    public ArrayList getHall(){
+    public void updateSeatColors(ObservableList<Node> seatList){
 
+        ArrayList<Rectangle> reservedSeats = DBController.readShowToSeats(1);
 
-        ArrayList<Rectangle> hall = new ArrayList<>();
+        for (Rectangle rSeat: reservedSeats ){
 
+            for (Node seat: seatList ){
 
-
-        hall.add(s1a1);
-        hall.add(s1a2);
-        hall.add(s1a3);
-        hall.add(s1a4);
-        hall.add(s1a5);
-        hall.add(s1a6);
-        hall.add(s1a7);
-        hall.add(s1a8);
-        hall.add(s1a9);
-        hall.add(s1a10);
-        hall.add(s1a11);
-        hall.add(s1a12);
-
-
-
-        return hall;
-    }
-
-    public void updateSeatColors(){
-
-        ArrayList<Rectangle> hall = getHall();
-        ArrayList<Rectangle> ReservedSeats = DBController.readShowToSeats(1);
-
-        for (Rectangle rSeat: ReservedSeats ){
-
-            //System.out.println(rSeat);
-
-            for (Rectangle seat: hall ){
-
-                //System.out.println(seat);
+                if(rSeat.getId().equals(seat.getId())){
+                    Rectangle redSeat = (Rectangle) seat;
+                    redSeat.setFill(Color.RED);
+                }
             }
         }
     }
-
 
 
 }
