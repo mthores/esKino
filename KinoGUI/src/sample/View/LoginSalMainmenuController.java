@@ -11,6 +11,8 @@ import javafx.scene.control.TableRow;
 
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -97,6 +99,10 @@ public class LoginSalMainmenuController {
         Parent cinemaParent = FXMLLoader.load(getClass().getResource("sal.fxml"));
         Scene cinemaScene = new Scene(cinemaParent);
         mainStage.setScene(cinemaScene);
+        HBox seatBox = (HBox) cinemaParent.getScene().getRoot().lookup("#seatBox");
+        System.out.println(seatBox);
+        System.out.println("Hello");
+
     }
 
     @FXML TableView <Object> tW2 = new TableView<>();
@@ -168,6 +174,8 @@ public class LoginSalMainmenuController {
 
 
         ArrayList<Rectangle> hall = new ArrayList<>();
+
+
 
         hall.add(s1a1);
         hall.add(s1a2);

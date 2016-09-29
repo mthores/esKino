@@ -15,7 +15,6 @@ import sample.View.ShowManagementController;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
-<<<<<<< HEAD
 import javafx.scene.shape.Rectangle;
 
 import java.sql.Connection;
@@ -77,11 +76,6 @@ public class DBController {
         return seats;
     }
 
-
-=======
-public class DBController {
-
-<<<<<<< HEAD
     public static void writeReservations(Shows show, Customer customer, String seat_id) {
         try {
             String sqlString = "INSERT INTO Reservation (reservation_id, Film_title, Customer_id, shows_id, seat_id)" +
@@ -115,7 +109,7 @@ public class DBController {
         }
 
     }
-=======
+
     //gets movies from db and adds to show management
     public void getMovieFromDB(){
         Connection conn;
@@ -140,10 +134,4 @@ public class DBController {
         }
     }
 
-
-
-
-
->>>>>>> 794dbc554e114132f402a045284c0dcbe5a697be
->>>>>>> 588954374b2e24dad36dc316cac49d356d4b9339
 }
