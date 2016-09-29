@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.collections.FXCollections?>
+
+<AnchorPane fx:id="acchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.View.AddMovieController">
+   <children>
+      <Button fx:id="addMovieButton" layoutX="1079.0" layoutY="729.0" mnemonicParsing="false" onAction="#saveFilmToDB" text="Add Movie" />
+      <Button fx:id="backButtion" layoutX="56.0" layoutY="729.0" mnemonicParsing="false" onAction="#toFilmButtonClicked" text="Back" />
+      <Label fx:id="MainTitelLabel" layoutX="457.0" layoutY="39.0" text="Add Movie">
+         <font>
+            <Font size="61.0" />
+         </font>
+      </Label>
+      <Label fx:id="savedLabel" layoutX="522.0" layoutY="628.0" textFill="#13da31">
+         <font>
+            <Font size="34.0" />
+         </font></Label>
+      <TextField fx:id="titelText" layoutX="151.0" layoutY="210.0" promptText="Titel" />
+      <TextField fx:id="durationText" layoutX="151.0" layoutY="250.0" promptText="Duration" />
+      <TextField fx:id="ticketPriceText" layoutX="151.0" layoutY="290.0" promptText="Ticket Price" />
+      <TextField fx:id="lincensPriceText" layoutX="151.0" layoutY="330.0" promptText="Licens Price" />
+      <TextArea fx:id="descriptionArea" layoutX="426.0" layoutY="219.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="193.0" prefWidth="356.0" promptText="Description of the Movie" />
+      <ComboBox fx:id="genreCombo" layoutX="151.0" layoutY="371.0" promptText="Genre">
+         <items>
+                 <FXCollections fx:factory="observableArrayList">
+                    <String fx:id="genreCombo1" fx:value="Action" />
+                    <String fx:id="genreCombo2" fx:value="Drama" />
+                    <String fx:id="genreCombo3" fx:value="Comedy" />
+                    <String fx:id="genreCombo4" fx:value="Horror" />
+                    <String fx:id="genreCombo5" fx:value="Thriller" />
+                    <String fx:id="genreCombo6" fx:value="Sci Fi" />
+                    <String fx:id="genreCombo7" fx:value="Adventure" />
+                    <String fx:id="genreCombo8" fx:value="Romance" />
+                    <String fx:id="genreCombo9" fx:value="Animation" />
+                    <String fx:id="genreCombo10" fx:value="Documentary" />
+
+                 </FXCollections>
+         </items>
+                 </ComboBox>
+      <ComboBox fx:id="ratingCombo" layoutX="151.0" layoutY="410.0" maxWidth="-Infinity" prefHeight="25.0" prefWidth="118.0" promptText="Rating">
+      <items>
+         <FXCollections fx:factory="observableArrayList">
+            <String fx:id="ratingCombo1" fx:value="Allowed for everyone" />
+            <String fx:id="ratingCombo2" fx:value="Allowed for everyone but be adviced under 7 years old" />
+            <String fx:id="ratingCombo3" fx:value="Allowed from the age of 11" />
+            <String fx:id="ratingCombo4" fx:value="Allowed from the age of 15" />
+
+         </FXCollections>
+      </items>
+   </ComboBox>
+      <ImageView fx:id="picturePreview" fitHeight="276.0" fitWidth="188.0" layoutX="919.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../billede.png" />
+         </image>
+         <viewport>
+            <Rectangle2D minX="934.0" minY="187.0" width="934.0" />
+         </viewport>
+      </ImageView>
+      <Button fx:id="addPictureButton" layoutX="974.0" layoutY="383.0" mnemonicParsing="false" text="Add picture" />
+      <Label layoutX="56.0" layoutY="214.0" text="Titel" />
+      <Label layoutX="56.0" layoutY="254.0" text="Duration" />
+      <Label layoutX="54.0" layoutY="294.0" text="Ticket Price" />
+      <Label layoutX="54.0" layoutY="334.0" text="Licens Price" />
+      <Label layoutX="523.0" layoutY="189.0" text="Description of the movie" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="150.0" layoutX="919.0" layoutY="210.0" stroke="BLACK" strokeType="INSIDE" width="188.0" />
+   </children>
+</AnchorPane>
