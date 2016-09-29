@@ -94,6 +94,8 @@ public class ShowManagementController{
         dbController.buildDataShowManagement(newShows);
 
         setDataToTableview();
+
+        clearFields();
     }
 
     @FXML
@@ -111,6 +113,12 @@ public class ShowManagementController{
 
     }
 
-
+    public void clearFields(){
+        selectMovieCombo.setValue("Select movie");
+        hallCheckbox1.setSelected(false);
+        hallCheckbox2.setSelected(false);
+        datepicker.setValue(null);
+        selectTimeCombo.setValue(null);
+    }
 
 }

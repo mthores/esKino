@@ -39,8 +39,30 @@ public class Film {
         this.id = new SimpleIntegerProperty(id);
     }
 
+    //Til at skrive til DB Film
+    public Film(String titel, String description, int ticketPrice,
+                String duration, String genre, String rating, int licensPrice, Date timestamp) {
+        this.titel = new SimpleStringProperty(titel);
+        this.description = new SimpleStringProperty(description);
+        this.ticketPrice = new SimpleIntegerProperty(ticketPrice);
+        this.duration = new SimpleStringProperty(duration);
+        this.genre = new SimpleStringProperty(genre);
+        this.rating = new SimpleStringProperty(rating);
+        this.licensPrice = new SimpleIntegerProperty(licensPrice);
+        this.timestamp = timestamp;
+    }
 
-
+    //Også til at skrive til DB Film
+    public Film(String titel, String description, int ticketPrice,
+                String duration, String genre, String rating, int licensPrice) {
+        this.titel = new SimpleStringProperty(titel);
+        this.description = new SimpleStringProperty(description);
+        this.ticketPrice = new SimpleIntegerProperty(ticketPrice);
+        this.duration = new SimpleStringProperty(duration);
+        this.genre = new SimpleStringProperty(genre);
+        this.rating = new SimpleStringProperty(rating);
+        this.licensPrice = new SimpleIntegerProperty(licensPrice);
+    }
 
     public Film(String titel, String duration, String genre, String rating, int ticketSold, Date timestamp){
         this.titel = new SimpleStringProperty(titel);
