@@ -147,12 +147,22 @@ public class Film {
     }
 
 <<<<<<< HEAD
+
     public  int getID() {
         return id.get();
-=======
+    }
     //work with titel!!!!
     public String toString(){
         return getTitel();
->>>>>>> 794dbc554e114132f402a045284c0dcbe5a697be
+
+=======
+    public  int getID() {
+        return id.get();
+    }
+
+    //work with titel!!!!
+    public String toString(){
+        return getTitel();
+>>>>>>> 41dc6dcac4696b9826364841abfba79ebdc15d23
     }
 }

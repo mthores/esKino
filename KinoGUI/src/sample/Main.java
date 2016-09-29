@@ -14,7 +14,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("View/ShowMangement.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("View/login.fxml"));
         LoginSalMainmenuController.initializeController(primaryStage);
         primaryStage.setTitle("EsKino");
         primaryStage.setScene(new Scene(root, 1280, 820));
