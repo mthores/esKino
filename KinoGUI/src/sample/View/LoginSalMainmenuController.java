@@ -30,8 +30,8 @@ public class LoginSalMainmenuController {
 
     private static MouseEvent e;
     private static Stage mainStage;
-    @FXML private TextField username;
-    @FXML private PasswordField password;
+    @FXML public static TextField username;
+    @FXML public static PasswordField password;
 
     @FXML private Label infoLabelCinema;
     @FXML private Label ticketCount;
@@ -60,7 +60,7 @@ public class LoginSalMainmenuController {
 
     public void loginButtonClicked() throws IOException {
 
-        if(username.getText().equals("admin") && password.getText().equals("admin")) {
+        if(true == DBController.loginCheck()) {
             System.out.println("logged in succesfully!");
 
             toMenuButtonClicked();

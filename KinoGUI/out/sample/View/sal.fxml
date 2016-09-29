@@ -26,20 +26,20 @@
          <children>
             <VBox alignment="CENTER" layoutX="56.0" layoutY="70.0" prefHeight="274.0" prefWidth="305.0">
                <children>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+                  <HBox fx:id="seatBox" alignment="CENTER" layoutX="10.0" layoutY="310.0" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                      <children>
-                        <Rectangle fx:id="s11" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle fx:id="s12" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle fx:id="s13" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle fx:id="s14" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle fx:id="s15" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle fx:id="s16" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle fx:id="s17" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle fx:id="s18" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle fx:id="s19" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle fx:id="s110" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle fx:id="s111" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-                        <Rectangle fx:id="s112" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s1a1" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s1a2" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s1a3" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s1a4" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s1a5" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s1a6" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s1a7" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s1a8" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s1a9" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s1a10" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s1a11" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
+                        <Rectangle fx:id="s1a12" arcHeight="5.0" arcWidth="5.0" fill="LIMEGREEN" height="14.0" onMouseClicked="#seatClicked" stroke="BLACK" strokeType="INSIDE" width="20.0" />
                      </children>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

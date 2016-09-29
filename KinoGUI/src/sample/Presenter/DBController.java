@@ -10,6 +10,7 @@ import java.sql.Statement;
 
 import javafx.collections.ObservableList;
 import sample.Model.Film;
+import sample.View.LoginSalMainmenuController;
 import sample.View.ShowManagementController;
 
 import java.sql.Connection;
@@ -23,7 +24,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import static sample.Presenter.DBConnection.getConnection;
+
 
 /**
  * Created by Mikkel on 27/09/2016.
@@ -31,13 +32,13 @@ import static sample.Presenter.DBConnection.getConnection;
 public class DBController {
 
 
-    public static ArrayList readShowToSeats(int showId){
+    public static ArrayList readShowToSeats(int showId) {
 
         Connection connection = null;
 
 
         Statement statement = null;
-        String sqlQuery = "SELECT * FROM Reservation WHERE shows_Id = '"+showId+"';";
+        String sqlQuery = "SELECT * FROM Reservation WHERE shows_Id = '" + showId + "';";
 
         ResultSet resultSet = null;
 
@@ -50,7 +51,7 @@ public class DBController {
 
             resultSet = statement.executeQuery(sqlQuery);
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
 
                 String temp = resultSet.getString("seat_Id");
                 Rectangle getRect = new Rectangle();
@@ -62,17 +63,17 @@ public class DBController {
 
             System.out.println("success");
 
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (statement != null) {
-                    try {
-                        statement.close();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
             }
+        }
         return seats;
     }
 
@@ -111,17 +112,17 @@ public class DBController {
     }
 
     //gets movies from db and adds to show management
-    public void getMovieFromDB(){
+    public void getMovieFromDB() {
         Connection conn;
 
-        try{
+        try {
             conn = DBConnection.getConnection();
             String sql = "Select Film_title from Film";
             ResultSet rsl = conn.createStatement().executeQuery(sql);
 
             ShowManagementController.setDataToComboxObservableList.clear();
 
-            while(rsl.next()){
+            while (rsl.next()) {
                 ShowManagementController.setDataToComboxObservableList.add(new Film(
                         rsl.getString("Film_title")
                 ));
@@ -129,9 +130,42 @@ public class DBController {
             rsl.close();
             conn.close();
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    //Checking login info from the DB
+    public static boolean loginCheck() {
+
+        Connection conn;
+        boolean check = false;
+
+        try {
+            conn = DBConnection.getConnection();
+
+            Statement mystate = conn.createStatement();
+
+            ResultSet rs = mystate.executeQuery("Select * Where "
+                    + "Login_name"
+                    + "="
+                    + LoginSalMainmenuController.username.getText());
+
+            if (rs.next()) {
+               String Login_Name = rs.getString("Login_name");
+                System.out.println(Login_Name);
+                return true;
+
+            } else {
+                return false;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return check;
+
+    }
 }
