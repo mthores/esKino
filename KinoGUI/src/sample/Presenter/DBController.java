@@ -184,23 +184,38 @@ public class DBController {
         return price;
     }
 
-    public static void writeReservations(Shows show, Customer customer, String seat_id) {
+
+    public static void writeReservations(int show, String customer, String seat_id, String movie_title){
+        Connection connection = null;
+
+        PreparedStatement statement = null;
+
+        ResultSet resultSet = null;
+
+        ArrayList<Rectangle> seats = new ArrayList();
+
         try {
-            String sqlString = "INSERT INTO Reservation (reservation_id, Film_title, Customer_id, shows_id, seat_id)" +
-                    "VALUES (DEFAULT , ?, ?, ?, ?, ?)";
+            connection = DBConnection.getConnection();
+            statement = connection.prepareStatement("INSERT INTO Reservation (`Film_title`, `Customer_id`, `shows_Id`, `seat_Id`) " +
+                    "VALUES ('"+movie_title+"', '"+customer+"', '"+show+"', '"+seat_id+"');");
 
-            PreparedStatement prepared = DBConnection.getConnection().prepareStatement(sqlString);
+            statement.execute();
 
-            prepared.setString(2, show.getMovieTitel());
-            prepared.setString(3, customer.getPhoneNumber());
-            prepared.setInt(4, show.getID());
-            prepared.setString(5, seat_id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
 
-            } catch (SQLException e) {
-                e.printStackTrace();
+                }
             }
-
         }
+
+
+    }
 
         public static void updateSoldTickets(Film film, int tickets) {
 
@@ -450,5 +465,41 @@ public class DBController {
 
     }
 
+    public static int getIdFromUserInfo (String name, String date, String time) {
+
+        Connection connection = null;
+
+        Statement statement = null;
+        String sqlQuery = "SELECT shows_Id FROM Shows WHERE movie_title = '"+ name+ "' AND Date = '"+ date +"' AND Time = '"+ time +"';";
+
+        int showId = 0;
+
+        ResultSet resultSet = null;
+
+        try {
+            connection = DBConnection.getConnection();
+            statement = connection.createStatement();
+
+            resultSet = statement.executeQuery(sqlQuery);
+
+            while(resultSet.next()){
+
+                showId = resultSet.getInt("shows_Id");
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return showId;
+    }
 
 }

@@ -33,6 +33,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 
 
 //import java.io.IOException;
@@ -46,14 +47,17 @@ public class LoginSalMainmenuController {
     //@FXML public static TextField username;
     //@FXML public static PasswordField password;
 
-    @FXML private Label infoLabelCinema;
-    @FXML private Label ticketCount;
-    @FXML private Label totalPrice;
+    @FXML
+    private Label infoLabelCinema;
+    @FXML
+    private Label ticketCount;
+    @FXML
+    private Label totalPrice;
     private int tC;
     private int ticketPrice;
 
 
-    public static void initializeController(Stage stage){
+    public static void initializeController(Stage stage) {
         mainStage = stage;
     }
 
@@ -61,8 +65,8 @@ public class LoginSalMainmenuController {
 
         TextField tF = (TextField) mainStage.getScene().getRoot().lookup("#username");
         TextField pF = (TextField) mainStage.getScene().getRoot().lookup("#password");
-        
-        if(true == DBController.loginCheck(tF.getText(),pF.getText())) {
+
+        if (true == DBController.loginCheck(tF.getText(), pF.getText())) {
             System.out.println("logged in succesfully!");
 
             toMenuButtonClicked();
@@ -75,7 +79,7 @@ public class LoginSalMainmenuController {
         }
     }
 
-    public void logOffButtonClicked() throws IOException{
+    public void logOffButtonClicked() throws IOException {
 
         Parent loginParent = FXMLLoader.load(getClass().getResource("login.fxml"));
         Scene loginScene = new Scene(loginParent);
@@ -92,7 +96,6 @@ public class LoginSalMainmenuController {
         ComboBox cbTitles = (ComboBox) reservationParent.getScene().getRoot().lookup("#movieCB");
         ObservableList<String> movieTitles = DBController.readMovieTitles();
         cbTitles.setItems(movieTitles);
-
 
 
         //Show ComboBox
@@ -128,17 +131,31 @@ public class LoginSalMainmenuController {
                     ObservableList<Shows> shows = DBController.readShowsOfMovie(cbTitles.getSelectionModel().getSelectedItem().toString());
 
                     ObservableList<String> showData = pullShowData(shows);
-                    //System.out.println(showData);
-                    //System.out.println("Det virker");
+
                     cbShows.setItems(showData);
                 }
             }
         });
 
+        Button reserveButton = (Button) reservationParent.getScene().getRoot().lookup("#reserveButton");
+
+        reserveButton.setOnAction(e -> {
+
+            try {
+                if (cbShows.getSelectionModel().getSelectedItem() == null) {
+                    Label warningLabel = (Label) reservationParent.getScene().getRoot().lookup("#warninglabel");
+                    warningLabel.setText("Vælg venligst forestilling først");
+                } else {
+                    reserveButtonClicked(cbTitles.getSelectionModel().getSelectedItem().toString(), cbShows.getSelectionModel().getSelectedItem().toString());
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+        });
+
 
     }
-
-
 
 
     public void toMenuButtonClicked() throws IOException {
@@ -148,7 +165,7 @@ public class LoginSalMainmenuController {
         mainStage.setScene(mainMenuScene);
     }
 
-    public void reserveButtonClicked() throws IOException {
+    public void reserveButtonClicked(String movie, String show) throws IOException {
 
         Parent cinemaParent = FXMLLoader.load(getClass().getResource("sal.fxml"));
         Scene cinemaScene = new Scene(cinemaParent);
@@ -157,7 +174,44 @@ public class LoginSalMainmenuController {
 
         HBox seatBox = (HBox) cinemaParent.getScene().getRoot().lookup("#seatBox");
         ObservableList<Node> seatList = seatBox.getChildren();
-        initializeHall(seatList);
+
+        String time = timeFromString(show);
+        String date = dateFromString(show);
+
+        int showId = DBController.getIdFromUserInfo(movie, date, time);
+        initializeHall(seatList, showId);
+
+
+        Button orderButton = (Button) cinemaParent.getScene().getRoot().lookup("#orderButton");
+
+        orderButton.setOnAction(e -> {
+
+            ArrayList<String> markedSeats = new ArrayList<String>();
+
+            for (Node seat : seatList) {
+
+                Rectangle rectSeat = (Rectangle) seat;
+
+                if (rectSeat.getFill() == Color.DODGERBLUE) {
+                    markedSeats.add(rectSeat.getId());
+                }
+
+            }
+            String phoneNumber="";
+            if(!markedSeats.isEmpty()) {
+                phoneNumber = inputDialog();
+            }
+
+            for (String seat : markedSeats) {
+                System.out.println(showId +" "+ phoneNumber + " " +seat);
+                DBController.writeReservations(showId, phoneNumber, seat, movie);
+                System.out.println("Virker det?");
+
+            }
+
+
+
+        });
 
     }
 
@@ -174,30 +228,33 @@ public class LoginSalMainmenuController {
         Scene addMovieScene = new Scene(addMovieParent);
         mainStage.setScene(addMovieScene);
     }
-    public void redigereButtonClicked() throws IOException{
+
+    public void redigereButtonClicked() throws IOException {
 
         Parent editMovieParent = FXMLLoader.load(getClass().getResource("EditMovie.fxml"));
         Scene editMovieScene = new Scene(editMovieParent);
         mainStage.setScene(editMovieScene);
     }
-    public void cancelButtonClicked() throws IOException{
+
+    public void cancelButtonClicked() throws IOException {
 
         Parent cancelParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
         Scene cancelScene = new Scene(cancelParent);
         mainStage.setScene(cancelScene);
     }
 
-    @FXML TableView <Film> tW2 = new TableView<>();
+    @FXML
+    TableView<Film> tW2 = new TableView<>();
 
 
-    public void administrationButtonClicked() throws  IOException {
+    public void administrationButtonClicked() throws IOException {
         Parent administrationParent = FXMLLoader.load(getClass().getResource("Film.fxml"));
         Scene administrationScene = new Scene(administrationParent);
 
         tW2.setRowFactory(tW2 -> {
             TableRow<Film> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     Object rowData = row.getItem();
                     System.out.println(rowData);
                 }
@@ -218,14 +275,14 @@ public class LoginSalMainmenuController {
 
     public void editMovieButtonClicked() throws IOException {
         //if (e.getSource() != null) {
-            Parent editMovieParent = FXMLLoader.load(getClass().getResource("EditMovie.fxml"));
-            Scene editMovieScene = new Scene(editMovieParent);
-            mainStage.setScene(editMovieScene);
+        Parent editMovieParent = FXMLLoader.load(getClass().getResource("EditMovie.fxml"));
+        Scene editMovieScene = new Scene(editMovieParent);
+        mainStage.setScene(editMovieScene);
         //}
     }
 
 
-    public void seatClicked(MouseEvent e){
+    public void seatClicked(MouseEvent e) {
         infoLabelCinema.setText("");
         Rectangle rect = (Rectangle) e.getSource();
         Paint rectColor = rect.getFill();
@@ -254,21 +311,20 @@ public class LoginSalMainmenuController {
 
     }
 
-    public void updateTicketCounters(int ticketPrice){
+    public void updateTicketCounters(int ticketPrice) {
 
-        ticketCount.setText(""+tC);
-        totalPrice.setText(""+tC*ticketPrice+" Kroner");
+        ticketCount.setText("" + tC);
+        totalPrice.setText("" + tC * ticketPrice + " Kroner");
     }
 
-    public void initializeHall(ObservableList<Node> seatList){
+    public void initializeHall(ObservableList<Node> seatList, int showId) {
+        ArrayList<Rectangle> reservedSeats = DBController.readShowToSeats(showId);
 
-        ArrayList<Rectangle> reservedSeats = DBController.readShowToSeats(1);
+        for (Rectangle rSeat : reservedSeats) {
 
-        for (Rectangle rSeat: reservedSeats ){
+            for (Node seat : seatList) {
 
-            for (Node seat: seatList ){
-
-                if(rSeat.getId().equals(seat.getId())){
+                if (rSeat.getId().equals(seat.getId())) {
                     Rectangle redSeat = (Rectangle) seat;
                     redSeat.setFill(Color.RED);
                 }
@@ -276,11 +332,11 @@ public class LoginSalMainmenuController {
         }
     }
 
-    public ObservableList<String> pullShowData(ObservableList<Shows> oL){
+    public ObservableList<String> pullShowData(ObservableList<Shows> oL) {
 
         ObservableList<String> dataListe = FXCollections.observableArrayList();
 
-        for (Shows show: oL ){
+        for (Shows show : oL) {
             String data = "";
             data = show.getDate();
             data += " - kl. " + show.getTime();
@@ -291,16 +347,21 @@ public class LoginSalMainmenuController {
     }
 
 
-
-    @FXML   private TableColumn<Film, String> TitelCol;
-    @FXML   private TableColumn<Film, Date> SidenCol;
-    @FXML   private TableColumn<Film, String> KategoriCol;
-    @FXML   private TableColumn<Film, String> SpilletidCol;
-    @FXML   private TableColumn<Film, String> RatingCol;
-    @FXML   private TableColumn<Film, Integer> SolgteCol;
+    @FXML
+    private TableColumn<Film, String> TitelCol;
+    @FXML
+    private TableColumn<Film, Date> SidenCol;
+    @FXML
+    private TableColumn<Film, String> KategoriCol;
+    @FXML
+    private TableColumn<Film, String> SpilletidCol;
+    @FXML
+    private TableColumn<Film, String> RatingCol;
+    @FXML
+    private TableColumn<Film, Integer> SolgteCol;
     public static ObservableList<Film> filmObservableList = FXCollections.observableArrayList();
 
-    public void refreshTableviewInFilm(){
+    public void refreshTableviewInFilm() {
         DBController dbController = new DBController();
         dbController.readInfoToFilm();
 
@@ -315,7 +376,7 @@ public class LoginSalMainmenuController {
 
     }
 
-    public void removeFilm(){
+    public void removeFilm() {
         SimpleIntegerProperty index = new SimpleIntegerProperty();
 
         DBController dbController = new DBController();
@@ -336,23 +397,74 @@ public class LoginSalMainmenuController {
         tW2.setRowFactory(tv -> {
             TableRow tableRow = new TableRow();
 
-                    Film film = (Film) tW2.getSelectionModel().getSelectedItem();
+            Film film = (Film) tW2.getSelectionModel().getSelectedItem();
 
-                    AddMovieController amc = new AddMovieController();
+            AddMovieController amc = new AddMovieController();
 
-                    amc.titelText.setText(film.getTitel());
-                    amc.descriptionArea.setText(film.getDescription());
-                    amc.durationText.setText(film.getDuration());
-                    amc.ticketPriceText.setText(Integer.toString(film.getTicketPrice()));
-                    amc.lincensPriceText.setText(Integer.toString(film.getLicensPrice()));
-                    amc.genreCombo.setValue(film.getGenre());
-                    amc.ratingCombo.setValue(film.getRating());
+            amc.titelText.setText(film.getTitel());
+            amc.descriptionArea.setText(film.getDescription());
+            amc.durationText.setText(film.getDuration());
+            amc.ticketPriceText.setText(Integer.toString(film.getTicketPrice()));
+            amc.lincensPriceText.setText(Integer.toString(film.getLicensPrice()));
+            amc.genreCombo.setValue(film.getGenre());
+            amc.ratingCombo.setValue(film.getRating());
 
             return tableRow;
-            });
+        });
 
 
     }
 
+    public String timeFromString(String str) {
+        String data = "";
+
+        data = str.substring(str.lastIndexOf(' ') + 1);
+
+        return data;
+    }
+
+    public String dateFromString(String str) {
+        String data = "";
+
+        data = str.substring(0, 10);
+
+        return data;
+    }
+
+    public String inputDialog() {
+
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Bekræft Reservation");
+        dialog.setHeaderText("Bekræft Reservation");
+        dialog.setContentText("Indtast venligst dit telefonnummer:");
+        String stringResult ="";
+
+        // Traditional way to get the response value.
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            stringResult = result.get();
+            if (stringResult.length() == 8 ) {
+                try {
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Success");
+                    alert.setHeaderText("Bekræftelse");
+                    alert.setContentText("Dine billetter er nu reserveret. Husk at afhente dem senest 15 min før forestillingen.");
+
+                    alert.showAndWait();
+
+                    toMenuButtonClicked();
+                } catch (Exception ex1) {
+                    ex1.printStackTrace();
+                }
+            } else {
+                inputDialog();
+            }
+        }
+        return stringResult;
+    }
 
 }
+
+
+

@@ -38,7 +38,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#toMenuButtonClicked" text="Tilbage" />
             <Region prefHeight="31.0" prefWidth="459.0" HBox.hgrow="ALWAYS" />
-            <Button mnemonicParsing="false" onAction="#reserveButtonClicked" text="Vælg" textAlignment="CENTER" />
+            <Button fx:id="reserveButton" mnemonicParsing="false" text="Vælg" textAlignment="CENTER" />
          </children>
          <padding>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />

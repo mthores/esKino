@@ -48,7 +48,7 @@
                </children>
             </VBox>
             <Button layoutX="56.0" layoutY="365.0" mnemonicParsing="false" onAction="#reservationMenuClicked" text="Tilbage" />
-            <Button layoutX="302.0" layoutY="365.0" mnemonicParsing="false" text="Reservér" />
+            <Button fx:id="orderButton" layoutX="302.0" layoutY="365.0" mnemonicParsing="false" text="Bestil" />
             <Label layoutX="170.0" layoutY="40.0" text="Lærred Sal 1" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#757474" height="17.0" layoutX="57.0" layoutY="23.0" stroke="BLACK" strokeType="INSIDE" width="305.0" />
             <Label fx:id="infoLabelCinema" layoutX="191.0" layoutY="370.0" prefHeight="17.0" prefWidth="0.0" />
