@@ -23,7 +23,7 @@ public class Main extends Application {
 
         LoginSalMainmenuController.initializeController(primaryStage);
         primaryStage.setTitle("EsKino");
-        primaryStage.setScene(new Scene(root, 800, 640));
+        primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
 
     }
