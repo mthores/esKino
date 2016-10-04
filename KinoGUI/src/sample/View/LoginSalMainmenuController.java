@@ -172,8 +172,18 @@ public class LoginSalMainmenuController {
         mainStage.setScene(cinemaScene);
 
 
-        HBox seatBox = (HBox) cinemaParent.getScene().getRoot().lookup("#seatBox");
-        ObservableList<Node> seatList = seatBox.getChildren();
+        VBox rowBox = (VBox) cinemaParent.getScene().getRoot().lookup("#rowBox");
+        ObservableList<Node> rowList = rowBox.getChildren();
+        ObservableList<Node> seatList = FXCollections.observableArrayList();
+
+        for (Node row : rowList) {
+
+            HBox currentRow = (HBox) row;
+           seatList.addAll(currentRow.getChildren());
+
+        }
+
+        //ObservableList<Node> seatList = seatBox.getChildren();
 
         String time = timeFromString(show);
         String date = dateFromString(show);
